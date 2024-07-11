@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_match_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.55" />
+
+        <ImageView
+            android:id="@+id/iv_event_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:padding="2dp"
+            android:src="@drawable/ic_event_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_event_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/abc_diatype_regular"
+            android:textColor="@color/ce_primary_text_color"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_event_icon"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_match_event"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@id/iv_event_icon"
+            app:layout_constraintTop_toTopOf="@id/iv_event_icon"
+            tools:text="Friday, 21 Sep, 7:30 PM IST" />
+
+        <ImageView
+            android:id="@+id/iv_place_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="2dp"
+            android:src="@drawable/ic_place_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_event_icon"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_event_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/abc_diatype_regular"
+            android:textColor="@color/ce_text_cta_color"
+            android:textSize="12sp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="@id/iv_place_icon"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_match_event"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@id/iv_place_icon"
+            app:layout_constraintTop_toTopOf="@id/iv_place_icon"
+            tools:text="Dubai International Cricket Stadium, Dubai" />
+
+        <ImageView
+            android:id="@+id/iv_stream_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="2dp"
+            android:src="@drawable/ic_live_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_place_icon"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_stream"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/abc_diatype_regular"
+            android:textColor="@color/ce_primary_text_color"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_stream_icon"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_match_event"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@id/iv_stream_icon"
+            app:layout_constraintTop_toTopOf="@id/iv_stream_icon"
+            tools:text="Disney Hotstar, Star Sports" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
