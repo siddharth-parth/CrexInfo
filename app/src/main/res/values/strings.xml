@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">CrexInfo</string>
+    <string name="commentary_fragment_title">Commentary</string>
+    <string name="commentary_fragment_subtitle">Commentary Fragment</string>
+    <string name="history_fragment_title">History</string>
+    <string name="history_fragment_subtitle">History Fragment</string>
+    <string name="info_fragment_title">Info</string>
+    <string name="live_fragment_title">Live</string>
+    <string name="live_fragment_subtitle">Live Fragment</string>
+    <string name="scorecard_fragment_title">Scorecard</string>
+    <string name="scorecard_fragment_subtitle">Scorecard Fragment</string>
+</resources>
