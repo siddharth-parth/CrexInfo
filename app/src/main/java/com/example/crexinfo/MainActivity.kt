@@ -2,6 +2,7 @@ package com.example.crexinfo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crexinfo.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        window.statusBarColor = ContextCompat.getColor(this, R.color.dark_background_color)
         setupViews()
     }
 

@@ -4,6 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="tab_indicator_color">#FF7575</color>
     <color name="dark_background_color">#15222E</color>
-    <color name="selected_tab_text_color">#FCFCFC</color>
-    <color name="tab_text_color">#CFD1D3</color>
+    <color name="primary_text_color">#CFD1D3</color>
+    <color name="secondary_text_color">#9FA3A7</color>
 </resources>
