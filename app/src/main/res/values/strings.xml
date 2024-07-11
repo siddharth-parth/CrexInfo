@@ -9,4 +9,5 @@
     <string name="live_fragment_subtitle">Live Fragment</string>
     <string name="scorecard_fragment_title">Scorecard</string>
     <string name="scorecard_fragment_subtitle">Scorecard Fragment</string>
+    <string name="right_arrow">&gt;</string>
 </resources>

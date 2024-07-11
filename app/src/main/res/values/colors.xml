@@ -6,4 +6,9 @@
     <color name="dark_background_color">#15222E</color>
     <color name="primary_text_color">#CFD1D3</color>
     <color name="secondary_text_color">#9FA3A7</color>
+    <color name="ce_secondary_text_color">#707070</color>
+    <color name="ce_primary_text_color">#000000</color>
+    <color name="ce_text_cta_color">#1860A6</color>
+    <color name="grey_color">#D1D1D1</color>
+    <color name="ce_separator_1">#EBECED</color>
 </resources>
