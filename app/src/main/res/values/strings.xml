@@ -10,4 +10,6 @@
     <string name="scorecard_fragment_title">Scorecard</string>
     <string name="scorecard_fragment_subtitle">Scorecard Fragment</string>
     <string name="right_arrow">&gt;</string>
+    <string name="see_more_matches">See more matches</string>
+    <string name="fixtures">Fixtures &gt;</string>
 </resources>
