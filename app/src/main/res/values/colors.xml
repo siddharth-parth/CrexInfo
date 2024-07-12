@@ -11,4 +11,6 @@
     <color name="ce_text_cta_color">#1860A6</color>
     <color name="grey_color">#D1D1D1</color>
     <color name="ce_separator_1">#EBECED</color>
+    <color name="ce_highlight_ac4">#FF7575</color>
+    <color name="ce_high_contrast_txt_color">#FCFCFC</color>
 </resources>
