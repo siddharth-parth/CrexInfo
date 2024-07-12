@@ -13,4 +13,6 @@
     <color name="ce_separator_1">#EBECED</color>
     <color name="ce_highlight_ac4">#FF7575</color>
     <color name="ce_high_contrast_txt_color">#FCFCFC</color>
+    <color name="tundora">#4A4A4A</color>
+    <color name="venice_blue">#05508D</color>
 </resources>

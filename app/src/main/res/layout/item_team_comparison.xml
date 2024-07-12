@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp">
+
+        <TextView
+            android:id="@+id/tv_comparison"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/euclid_circular_a_medium"
+            android:text="@string/team_comparison"
+            android:textColor="@color/ce_primary_text_color"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_comparison_matches_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/euclid_circular_a_medium"
+            android:text="@string/last_10_matches"
+            android:textColor="@color/tundora"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_comparison"
+            app:layout_constraintStart_toEndOf="@+id/tv_comparison"
+            app:layout_constraintTop_toTopOf="@id/tv_comparison" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_overall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_rounded_corners_8dp"
+            android:backgroundTint="@color/venice_blue"
+            android:fontFamily="@font/euclid_circular_a_medium"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:text="@string/overall"
+            android:textAllCaps="false"
+            android:textColor="@color/ce_high_contrast_txt_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_comparison" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_venue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_rounded_corners_8dp_stoke_1dp"
+            android:fontFamily="@font/euclid_circular_a_medium"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:text="@string/on_venue"
+            android:textAllCaps="false"
+            android:textColor="@color/tundora"
+            app:layout_constraintStart_toEndOf="@id/btn_overall"
+            app:layout_constraintTop_toBottomOf="@id/tv_comparison" />
+
+        <ImageView
+            android:id="@+id/iv_team_one"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_overall"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_pbks" />
+
+        <TextView
+            android:id="@+id/tv_team_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/abc_diatype_medium"
+            android:includeFontPadding="false"
+            android:textColor="@color/ce_primary_text_color"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_one_all_teams"
+            app:layout_constraintStart_toEndOf="@id/iv_team_one"
+            app:layout_constraintTop_toTopOf="@id/iv_team_one"
+            tools:text="PBKS" />
+
+        <TextView
+            android:id="@+id/tv_one_all_teams"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/euclid_circular_a_regular"
+            android:includeFontPadding="false"
+            android:text="@string/vs_all_teams"
+            android:textColor="@color/tundora"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_team_one"
+            app:layout_constraintStart_toStartOf="@id/tv_team_one"
+            app:layout_constraintTop_toBottomOf="@id/tv_team_one" />
+
+        <ImageView
+            android:id="@+id/iv_team_two"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_overall"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_rr" />
+
+        <TextView
+            android:id="@+id/tv_team_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/abc_diatype_medium"
+            android:includeFontPadding="false"
+            android:textColor="@color/ce_primary_text_color"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_one_all_teams"
+            app:layout_constraintEnd_toStartOf="@id/iv_team_two"
+            app:layout_constraintTop_toTopOf="@id/iv_team_two"
+            tools:text="RR" />
+
+        <TextView
+            android:id="@+id/tv_two_all_teams"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/euclid_circular_a_regular"
+            android:includeFontPadding="false"
+            android:text="@string/vs_all_teams"
+            android:textColor="@color/tundora"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_team_two"
+            app:layout_constraintEnd_toEndOf="@id/tv_team_two"
+            app:layout_constraintTop_toBottomOf="@id/tv_team_two" />
+
+        <View
+            android:id="@+id/view_separator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/ce_separator_1"
+            app:layout_constraintTop_toBottomOf="@id/tv_one_all_teams" />
+
+        <include
+            android:id="@+id/layout_matches_played_stat"
+            layout="@layout/layout_team_comparison_stat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/view_separator" />
+
+        <include
+            android:id="@+id/layout_matches_win_stat"
+            layout="@layout/layout_team_comparison_stat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/layout_matches_played_stat" />
+
+        <include
+            android:id="@+id/layout_avg_score_stat"
+            layout="@layout/layout_team_comparison_stat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/layout_matches_win_stat" />
+
+        <include
+            android:id="@+id/layout_highest_score_stat"
+            layout="@layout/layout_team_comparison_stat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/layout_avg_score_stat" />
+
+        <include
+            android:id="@+id/layout_lowest_score_stat"
+            layout="@layout/layout_team_comparison_stat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/layout_highest_score_stat" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

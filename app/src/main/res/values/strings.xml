@@ -12,4 +12,9 @@
     <string name="right_arrow">&gt;</string>
     <string name="see_more_matches">See more matches</string>
     <string name="fixtures">Fixtures &gt;</string>
+    <string name="team_comparison">Team Comparison</string>
+    <string name="last_10_matches">(Last 10 matches)</string>
+    <string name="overall">Overall</string>
+    <string name="on_venue">On Venue</string>
+    <string name="vs_all_teams">vs all teams</string>
 </resources>
