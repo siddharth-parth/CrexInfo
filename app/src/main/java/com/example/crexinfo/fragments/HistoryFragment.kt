@@ -1,22 +1,22 @@
-package com.example.crexinfo
+package com.example.crexinfo.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.crexinfo.databinding.FragmentCommentaryBinding
+import com.example.crexinfo.databinding.FragmentHistoryBinding
 
-class CommentaryFragment : Fragment() {
+class HistoryFragment : Fragment() {
 
-    private lateinit var binding: FragmentCommentaryBinding
+    private lateinit var binding: FragmentHistoryBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCommentaryBinding.inflate(layoutInflater)
+        binding = FragmentHistoryBinding.inflate(layoutInflater)
         return binding.root
     }
 }

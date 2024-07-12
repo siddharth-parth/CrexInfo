@@ -1,4 +1,4 @@
-package com.example.crexinfo
+package com.example.crexinfo.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,9 +1,11 @@
-package com.example.crexinfo
+package com.example.crexinfo.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.crexinfo.adapters.CrexPagerAdapter
+import com.example.crexinfo.R
 import com.example.crexinfo.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
