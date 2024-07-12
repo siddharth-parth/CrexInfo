@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:cardCornerRadius="6dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_score_card"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_team_one"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/ic_rr" />
+
+                <TextView
+                    android:id="@+id/tv_team_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/euclid_circular_a_regular"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/ce_secondary_text_color"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_team_one"
+                    app:layout_constraintStart_toEndOf="@id/iv_team_one"
+                    app:layout_constraintTop_toTopOf="@id/iv_team_one"
+                    tools:text="RR" />
+
+                <TextView
+                    android:id="@+id/tv_team_one_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:fontFamily="@font/euclid_circular_a_regular"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/ce_secondary_text_color"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_team_one"
+                    app:layout_constraintStart_toEndOf="@id/tv_team_one"
+                    app:layout_constraintTop_toTopOf="@id/tv_team_one"
+                    tools:text="185" />
+
+                <TextView
+                    android:id="@+id/tv_team_one_overs_played"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/euclid_circular_a_regular"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/ce_secondary_text_color"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_team_one_score"
+                    app:layout_constraintStart_toEndOf="@id/tv_team_one_score"
+                    app:layout_constraintTop_toTopOf="@id/tv_team_one_score"
+                    tools:text="20.0" />
+
+                <ImageView
+                    android:id="@+id/iv_team_two"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_team_one"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/ic_pbks" />
+
+                <TextView
+                    android:id="@+id/tv_team_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/euclid_circular_a_regular"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/ce_secondary_text_color"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_team_two"
+                    app:layout_constraintStart_toEndOf="@id/iv_team_two"
+                    app:layout_constraintTop_toTopOf="@id/iv_team_two"
+                    tools:text="PBKS" />
+
+                <TextView
+                    android:id="@+id/tv_team_two_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:fontFamily="@font/euclid_circular_a_regular"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/ce_secondary_text_color"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_team_two"
+                    app:layout_constraintStart_toEndOf="@id/tv_team_two"
+                    app:layout_constraintTop_toTopOf="@id/tv_team_two"
+                    tools:text="183-4" />
+
+                <TextView
+                    android:id="@+id/tv_team_two_overs_played"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/euclid_circular_a_regular"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/ce_secondary_text_color"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_team_two_score"
+                    app:layout_constraintStart_toEndOf="@id/tv_team_two_score"
+                    app:layout_constraintTop_toTopOf="@id/tv_team_two_score"
+                    tools:text="20.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/view_separator"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="32dp"
+                android:background="@color/grey_color"
+                app:layout_constraintBottom_toBottomOf="@id/cl_score_card"
+                app:layout_constraintStart_toEndOf="@id/cl_score_card"
+                app:layout_constraintTop_toTopOf="@id/cl_score_card" />
+
+            <include
+                android:id="@+id/layout_result_badge"
+                layout="@layout/item_match_result_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/view_separator"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_match_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/euclid_circular_a_regular"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:textColor="@color/ce_secondary_text_color"
+                android:textSize="10sp"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/layout_result_badge"
+                app:layout_constraintTop_toTopOf="@id/layout_result_badge"
+                tools:text="23rd T20" />
+
+            <TextView
+                android:id="@+id/tv_series"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="24dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/euclid_circular_a_regular"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:textColor="@color/ce_secondary_text_color"
+                android:textSize="12sp"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/layout_result_badge"
+                app:layout_constraintTop_toBottomOf="@id/tv_match_number"
+                app:layout_constraintVertical_bias="0"
+                tools:text="RR VS PBKS 21st Sept" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

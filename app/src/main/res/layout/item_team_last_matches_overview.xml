@@ -9,7 +9,7 @@
         android:layout_marginTop="12dp">
 
         <ImageView
-            android:id="@+id/iv_team_one"
+            android:id="@+id/iv_team"
             android:layout_width="30dp"
             android:layout_height="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -19,16 +19,16 @@
             tools:src="@drawable/ic_pbks" />
 
         <TextView
-            android:id="@+id/tv_team_one"
+            android:id="@+id/tv_team"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:fontFamily="@font/abc_diatype_medium"
             android:textColor="@color/ce_primary_text_color"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_team_one"
-            app:layout_constraintStart_toEndOf="@id/iv_team_one"
-            app:layout_constraintTop_toTopOf="@id/iv_team_one"
+            app:layout_constraintBottom_toBottomOf="@id/iv_team"
+            app:layout_constraintStart_toEndOf="@id/iv_team"
+            app:layout_constraintTop_toTopOf="@id/iv_team"
             tools:text="PBKS" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -40,8 +40,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_down_arrow"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/item_match_result_badge"
-            tools:itemCount="5" />
+            tools:itemCount="5"
+            tools:listitem="@layout/item_match_result_badge" />
 
         <ImageView
             android:id="@+id/iv_down_arrow"
