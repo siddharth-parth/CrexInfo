@@ -35,8 +35,8 @@ import com.example.crexinfo.model.viewdatas.DynamicListViewData
 import com.example.crexinfo.model.viewdatas.InfoSectionTitleViewData
 import com.example.crexinfo.model.viewdatas.MatchDetailsViewData
 import com.example.crexinfo.model.viewdatas.MatchEventViewData
-import com.example.crexinfo.model.viewdatas.PlayingXITeamViewData
-import com.example.crexinfo.model.viewdatas.RecentMatchCardViewData
+import com.example.crexinfo.model.viewdatas.TeamSquadViewData
+import com.example.crexinfo.model.viewdatas.RecentMatchInfoViewData
 import com.example.crexinfo.model.viewdatas.SeeMoreFixturesViewData
 import com.example.crexinfo.model.viewdatas.TeamComparisonViewData
 import com.example.crexinfo.model.viewdatas.TeamRecentMatchesViewData
@@ -131,14 +131,14 @@ class InfoPageAdapter(private val items: List<DynamicListViewData>) :
             }
 
             is ItemPlayingXITeamViewHolder -> {
-                val data = items[position].data as? PlayingXITeamViewData
+                val data = items[position].data as? TeamSquadViewData
                     ?: throw IllegalArgumentException("Data cannot be null")
 
                 holder.bind(data)
             }
 
             is ItemRecentMatchCardViewHolder -> {
-                val data = items[position].data as? RecentMatchCardViewData
+                val data = items[position].data as? RecentMatchInfoViewData
                     ?: throw IllegalArgumentException("Data cannot be null")
 
                 holder.bind(data)

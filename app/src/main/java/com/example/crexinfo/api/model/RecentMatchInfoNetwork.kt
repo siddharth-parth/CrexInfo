@@ -2,7 +2,7 @@ package com.example.crexinfo.api.model
 
 import com.google.gson.annotations.SerializedName
 
-data class TeamFormNetwork(
+data class RecentMatchInfoNetwork(
     @SerializedName("match_no")
     val matchNumber: String,
     @SerializedName("team1")

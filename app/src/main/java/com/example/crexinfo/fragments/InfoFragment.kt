@@ -1,7 +1,6 @@
 package com.example.crexinfo.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +44,7 @@ class InfoFragment : Fragment() {
 
     private fun observeData() {
         viewModel.infoLiveData.observe(viewLifecycleOwner) { response ->
-            Log.d("PUI", "observeData: ${response.teamForm}")
+
         }
     }
 

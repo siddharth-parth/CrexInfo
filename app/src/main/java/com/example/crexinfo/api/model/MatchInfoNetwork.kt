@@ -14,7 +14,7 @@ data class MatchInfoNetwork(
     @SerializedName("team1_bench")
     val teamOneBench: List<PlayerNetwork>,
     @SerializedName("team1_form")
-    val teamOneForm: List<TeamFormNetwork>,
+    val teamOneRecentMatchesInfo: List<RecentMatchInfoNetwork>,
     @SerializedName("team1_full")
     val teamOneFull: String,
     @SerializedName("team1_playing")
@@ -24,7 +24,7 @@ data class MatchInfoNetwork(
     @SerializedName("team2_bench")
     val teamTwoBench: List<PlayerNetwork>,
     @SerializedName("team2_form")
-    val teamTwoForm: List<TeamFormNetwork>,
+    val teamTwoRecentMatchesInfo: List<RecentMatchInfoNetwork>,
     @SerializedName("team2_full")
     val teamTwoFull: String,
     @SerializedName("team2_playing")
@@ -32,7 +32,7 @@ data class MatchInfoNetwork(
     @SerializedName("team2_short")
     val teamTwoShort: String,
     @SerializedName("team_comparison")
-    val teamComparison: TeamComparisonStatsNetwork,
+    val teamComparison: TeamComparisonNetwork,
     @SerializedName("team_form")
     val teamForm: String,
     @SerializedName("venue_name")
