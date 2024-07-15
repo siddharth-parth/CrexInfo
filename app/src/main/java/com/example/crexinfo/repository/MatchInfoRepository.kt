@@ -6,6 +6,8 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.example.crexinfo.api.model.MatchInfoNetwork
+import com.example.crexinfo.helper.ViewDataConverter
+import com.example.crexinfo.model.viewdatas.MatchInfoViewData
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -13,7 +15,7 @@ import kotlinx.coroutines.withContext
 
 class MatchInfoRepository(private val requestQueue: RequestQueue) {
 
-    val infoLiveData = MutableLiveData<MatchInfoNetwork>()
+    val infoLiveData = MutableLiveData<MatchInfoViewData>()
 
     suspend fun fetchData() {
         withContext(Dispatchers.IO) {
@@ -24,7 +26,7 @@ class MatchInfoRepository(private val requestQueue: RequestQueue) {
                 { response ->
                     val gson = Gson()
                     val infoData = gson.fromJson(response.toString(), MatchInfoNetwork::class.java)
-                    infoLiveData.postValue(infoData)
+                    infoLiveData.postValue(ViewDataConverter.convertMatchInfo(infoData))
                 },
                 { error ->
                     Log.e("CrexInfo", "API failed due to error: ", error.cause)

@@ -70,6 +70,7 @@
                 android:layout_marginEnd="4dp"
                 android:fontFamily="@font/euclid_circular_a_semibold"
                 android:textColor="@color/secondary_text_color"
+                android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="@id/iv_team_two"
                 app:layout_constraintEnd_toStartOf="@id/iv_team_two"
                 app:layout_constraintTop_toTopOf="@id/iv_team_two"

@@ -6,6 +6,8 @@ import com.example.crexinfo.model.ITEM_MATCH_DETAILS
 class MatchDetailsViewData private constructor(
     val teamOneShortName: String,
     val teamTwoShortName: String,
+    val teamOneKey: String,
+    val teamTwoKey: String,
     val matchTime: String,
     val matchDate: String,
     val matchNumber: String,
@@ -18,6 +20,8 @@ class MatchDetailsViewData private constructor(
     class Builder {
         private var teamOneShortName: String = ""
         private var teamTwoShortName: String = ""
+        private var teamOneKey: String = ""
+        private var teamTwoKey: String = ""
         private var matchTime: String = ""
         private var matchDate: String = ""
         private var matchNumber: String = ""
@@ -29,6 +33,14 @@ class MatchDetailsViewData private constructor(
 
         fun teamTwoShortName(teamTwoShortName: String) = apply {
             this.teamTwoShortName = teamTwoShortName
+        }
+
+        fun teamOneKey(teamOneKey: String) = apply {
+            this.teamOneKey = teamOneKey
+        }
+
+        fun teamTwoKey(teamTwoKey: String) = apply {
+            this.teamTwoKey = teamTwoKey
         }
 
         fun matchTime(matchTime: String) = apply {
@@ -50,6 +62,8 @@ class MatchDetailsViewData private constructor(
         fun build() = MatchDetailsViewData(
             teamOneShortName,
             teamTwoShortName,
+            teamOneKey,
+            teamTwoKey,
             matchTime,
             matchDate,
             matchNumber,
@@ -61,6 +75,8 @@ class MatchDetailsViewData private constructor(
         return Builder()
             .teamOneShortName(teamOneShortName)
             .teamTwoShortName(teamTwoShortName)
+            .teamOneKey(teamOneKey)
+            .teamTwoKey(teamTwoKey)
             .matchTime(matchTime)
             .matchDate(matchDate)
             .matchNumber(matchNumber)

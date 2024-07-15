@@ -74,4 +74,8 @@ object FormatHelper {
 
         return result
     }
+
+    fun String.getTeamLogo(): String {
+        return "https://cricketvectors.akamaized.net/Teams/$this.png"
+    }
 }

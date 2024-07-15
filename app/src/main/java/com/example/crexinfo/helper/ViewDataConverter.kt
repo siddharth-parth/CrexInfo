@@ -38,6 +38,8 @@ object ViewDataConverter {
         return MatchDetailsViewData.Builder()
             .teamOneShortName(matchInfoNetwork.teamOneShort)
             .teamTwoShortName(matchInfoNetwork.teamTwoShort)
+            .teamOneKey(matchInfoNetwork.teamOneKey)
+            .teamTwoKey(matchInfoNetwork.teamTwoKey)
             .matchTime(FormatHelper.extractTime(matchInfoNetwork.matchTime))
             .matchDate(FormatHelper.extractDayAndMonthAbbreviation(matchInfoNetwork.matchTime))
             .matchNumber(matchInfoNetwork.matchNumber)

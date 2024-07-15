@@ -17,6 +17,8 @@ data class MatchInfoNetwork(
     val teamOneRecentMatchesInfo: List<RecentMatchInfoNetwork>,
     @SerializedName("team1_full")
     val teamOneFull: String,
+    @SerializedName("team1_key")
+    val teamOneKey: String,
     @SerializedName("team1_playing")
     val teamOnePlaying: List<PlayerNetwork>,
     @SerializedName("team1_short")
@@ -27,6 +29,8 @@ data class MatchInfoNetwork(
     val teamTwoRecentMatchesInfo: List<RecentMatchInfoNetwork>,
     @SerializedName("team2_full")
     val teamTwoFull: String,
+    @SerializedName("team2_key")
+    val teamTwoKey: String,
     @SerializedName("team2_playing")
     val teamTwoPlaying: List<PlayerNetwork>,
     @SerializedName("team2_short")
