@@ -14,6 +14,12 @@ import com.example.crexinfo.model.viewdatas.TeamRecentMatchesViewData
 class ItemTeamRecentMatchesViewHolder(private val binding: ItemTeamRecentMatchesBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
+    private var mLastClickTime = System.currentTimeMillis()
+
+    companion object {
+        private const val CLICK_TIME_INTERVAL = 400
+    }
+
     fun bind(
         position: Int,
         viewData: BaseViewType,
@@ -35,6 +41,11 @@ class ItemTeamRecentMatchesViewHolder(private val binding: ItemTeamRecentMatches
             rvTeamForm.adapter = ResultBadgeAdapter(data.teamForm)
 
             root.setOnClickListener {
+                val now = System.currentTimeMillis()
+                if (now - mLastClickTime < CLICK_TIME_INTERVAL) {
+                    return@setOnClickListener
+                }
+                mLastClickTime = now
                 infoPageAdapterClickListener.onTeamFormExpanded(
                     position,
                     viewData

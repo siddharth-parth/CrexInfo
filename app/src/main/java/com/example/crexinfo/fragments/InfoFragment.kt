@@ -122,6 +122,15 @@ class InfoFragment : Fragment(), InfoPageAdapterClickListener {
     override fun onTeamFormExpanded(position: Int, viewData: BaseViewType) {
         val data = viewData as? TeamRecentMatchesViewData ?: return
 
+        val updatedViewData = data.toBuilder()
+            .isExpanded(!data.isExpanded)
+            .build()
+
+        infoAdapter.updateItemIndex(
+            position,
+            updatedViewData
+        )
+
         val matchData = matchInfoData ?: return
         val teamInd = if (data.isTeamOne) {
             0
@@ -131,25 +140,29 @@ class InfoFragment : Fragment(), InfoPageAdapterClickListener {
         val teamRecentMatchesInfo = (matchData.teamsRecentMatches[teamInd]).teamRecentMatchesInfo
 
         if (data.isExpanded) {
-            val seeMoreViewData =
-                infoAdapter.getItemAtIndex(position + teamRecentMatchesInfo.size + 1)
+            val seeMoreViewData = getSeeMoreViewFromAdapter()
             val removeItems = (teamRecentMatchesInfo as List<BaseViewType>).toMutableList()
-            removeItems.add(seeMoreViewData)
+            seeMoreViewData?.let {
+                removeItems.add(it)
+            }
             infoAdapter.removeItemsAtIndex(position + 1, removeItems)
         } else {
             val addItems = (teamRecentMatchesInfo as List<BaseViewType>).toMutableList()
             addItems.add(SeeMoreFixturesViewData.Builder().build())
             infoAdapter.addItemsAtIndex(position + 1, addItems)
         }
+    }
 
-        val updatedViewData = data.toBuilder()
-            .isExpanded(!data.isExpanded)
-            .build()
+    private fun getSeeMoreViewFromAdapter(): SeeMoreFixturesViewData? {
+        var seeMoreViewData: SeeMoreFixturesViewData? = null
+        infoAdapter.items.forEach { item ->
+            if (item is SeeMoreFixturesViewData) {
+                seeMoreViewData = item
+                return@forEach
+            }
+        }
 
-        infoAdapter.updateItemIndex(
-            position,
-            updatedViewData
-        )
+        return seeMoreViewData
     }
 
     override fun onTeamPlayingXIOpened(position: Int, viewData: BaseViewType) {

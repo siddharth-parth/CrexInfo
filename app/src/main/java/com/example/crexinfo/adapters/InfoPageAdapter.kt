@@ -35,7 +35,7 @@ import com.example.crexinfo.model.ITEM_TEAM_RECENT_MATCHES
 class InfoPageAdapter(private val infoPagerAdapterClickListener: InfoPageAdapterClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val items: MutableList<BaseViewType> = mutableListOf()
+    val items: MutableList<BaseViewType> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
