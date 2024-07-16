@@ -6,23 +6,33 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.crexinfo.adapters.InfoPageAdapter
+import com.example.crexinfo.adapters.InfoPageAdapterClickListener
 import com.example.crexinfo.api.CrexVolley
 import com.example.crexinfo.databinding.FragmentInfoBinding
 import com.example.crexinfo.helper.FormatHelper.getTeamLogo
 import com.example.crexinfo.helper.ViewHelper
-import com.example.crexinfo.model.viewdatas.MatchDetailsViewData
+import com.example.crexinfo.model.BaseViewType
+import com.example.crexinfo.model.viewdatas.DividerViewData
+import com.example.crexinfo.model.viewdatas.InfoSectionTitleViewData
+import com.example.crexinfo.model.viewdatas.MatchInfoViewData
+import com.example.crexinfo.model.viewdatas.TeamRecentMatchesViewData
 import com.example.crexinfo.repository.MatchInfoRepository
 import com.example.crexinfo.viewmodel.InfoViewModel
 import com.example.crexinfo.viewmodel.InfoViewModelFactory
 
-class InfoFragment : Fragment() {
+class InfoFragment : Fragment(), InfoPageAdapterClickListener {
 
     private lateinit var binding: FragmentInfoBinding
 
     private lateinit var infoRepository: MatchInfoRepository
-
     private lateinit var viewModel: InfoViewModel
+
+    private lateinit var infoAdapter: InfoPageAdapter
+
+    private var matchInfoData: MatchInfoViewData? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,13 +52,45 @@ class InfoFragment : Fragment() {
             InfoViewModelFactory(infoRepository)
         )[InfoViewModel::class.java]
 
+        initRecyclerView()
         observeData()
         fetchData()
     }
 
+    private fun initRecyclerView() {
+        binding.rvMatchInfo.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            infoAdapter = InfoPageAdapter(this@InfoFragment)
+            adapter = infoAdapter
+        }
+    }
+
     private fun observeData() {
         viewModel.infoLiveData.observe(viewLifecycleOwner) { response ->
-            setMatchDetails(response.matchDetails)
+            matchInfoData = response
+            setMatchDetails(response)
+
+            infoAdapter.addItems(
+                listOf(
+                    response.matchDetails,
+                    response.matchEvent,
+                    InfoSectionTitleViewData.Builder()
+                        .title("Playing XI")
+                        .build(),
+                    response.teamsSquad[0],
+                    DividerViewData.Builder().build(),
+                    response.teamsSquad[1],
+                    DividerViewData.Builder().build(),
+                    InfoSectionTitleViewData.Builder()
+                        .title("Team Form")
+                        .build(),
+                    response.teamsRecentMatches[0],
+                    DividerViewData.Builder().build(),
+                    response.teamsRecentMatches[1],
+                    DividerViewData.Builder().build(),
+                    response.teamsComparison
+                )
+            )
         }
     }
 
@@ -56,23 +98,56 @@ class InfoFragment : Fragment() {
         viewModel.fetchInfo()
     }
 
-    private fun setMatchDetails(matchDetails: MatchDetailsViewData) {
+    private fun setMatchDetails(matchInfo: MatchInfoViewData) {
         binding.apply {
             Glide.with(this@InfoFragment)
-                .load(matchDetails.teamOneKey.getTeamLogo())
+                .load(matchInfo.teamOneKey.getTeamLogo())
                 .placeholder(ViewHelper.getShimmer())
                 .into(ivTeamOne)
 
             Glide.with(this@InfoFragment)
-                .load(matchDetails.teamTwoKey.getTeamLogo())
+                .load(matchInfo.teamTwoKey.getTeamLogo())
                 .placeholder(ViewHelper.getShimmer())
                 .into(ivTeamTwo)
 
-            tvTeamOne.text = matchDetails.teamOneShortName
-            tvTeamTwo.text = matchDetails.teamTwoShortName
+            tvTeamOne.text = matchInfo.teamOneShortName
+            tvTeamTwo.text = matchInfo.teamTwoShortName
 
-            tvMatchTime.text = matchDetails.matchTime
-            tvMatchDate.text = matchDetails.matchDate
+            tvMatchTime.text = matchInfo.matchTime
+            tvMatchDate.text = matchInfo.matchDate
         }
+    }
+
+    override fun onTeamFormExpanded(position: Int, viewData: BaseViewType) {
+        val data = viewData as? TeamRecentMatchesViewData ?: return
+
+        val matchData = matchInfoData ?: return
+        val teamInd = if (data.isTeamOne) {
+            0
+        } else {
+            1
+        }
+        val teamRecentMatchesInfo = (matchData.teamsRecentMatches[teamInd]).teamRecentMatchesInfo
+
+        val updatedIsExpanded = if (data.isExpanded) {
+            infoAdapter.removeItemsAtIndex(position + 1, teamRecentMatchesInfo)
+            false
+        } else {
+            infoAdapter.addItemsAtIndex(position + 1, teamRecentMatchesInfo)
+            true
+        }
+
+        val updatedViewData = data.toBuilder()
+            .isExpanded(updatedIsExpanded)
+            .build()
+
+        infoAdapter.updateItemIndex(
+            position,
+            updatedViewData
+        )
+    }
+
+    override fun onTeamPlayingXIOpened(position: Int, viewData: BaseViewType) {
+
     }
 }

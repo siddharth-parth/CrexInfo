@@ -7,4 +7,8 @@ class DividerViewData : BaseViewType {
 
     override val viewType: Int
         get() = ITEM_DIVIDER
+
+    class Builder {
+        fun build() = DividerViewData()
+    }
 }

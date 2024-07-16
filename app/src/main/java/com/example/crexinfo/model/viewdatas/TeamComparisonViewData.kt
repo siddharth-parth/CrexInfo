@@ -5,7 +5,7 @@ import com.example.crexinfo.model.ITEM_TEAM_COMPARISON
 
 class TeamComparisonViewData private constructor(
     val onVenueStats: TeamComparisonStatsViewData,
-    val overallStats: TeamComparisonStatsViewData
+    val overallStats: TeamComparisonStatsViewData,
 ) : BaseViewType {
 
     override val viewType: Int
@@ -14,7 +14,8 @@ class TeamComparisonViewData private constructor(
     class Builder {
         private var onVenueStats: TeamComparisonStatsViewData =
             TeamComparisonStatsViewData.Builder().build()
-        private var overallStats: TeamComparisonStatsViewData = TeamComparisonStatsViewData.Builder().build()
+        private var overallStats: TeamComparisonStatsViewData =
+            TeamComparisonStatsViewData.Builder().build()
 
         fun onVenueStats(onVenueStats: TeamComparisonStatsViewData) = apply {
             this.onVenueStats = onVenueStats
@@ -24,7 +25,10 @@ class TeamComparisonViewData private constructor(
             this.overallStats = overallStats
         }
 
-        fun build() = TeamComparisonViewData(onVenueStats, overallStats)
+        fun build() = TeamComparisonViewData(
+            onVenueStats,
+            overallStats
+        )
     }
 
     fun toBuilder(): Builder {

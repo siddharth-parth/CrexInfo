@@ -78,4 +78,8 @@ object FormatHelper {
     fun String.getTeamLogo(): String {
         return "https://cricketvectors.akamaized.net/Teams/$this.png"
     }
+
+    fun String.getSeriesLogo(): String {
+        return "https://cricketvectors.akamaized.net/Series/$this.png"
+    }
 }

@@ -5,7 +5,8 @@ import com.example.crexinfo.model.ITEM_PLAYING_XI_TEAM
 import com.example.crexinfo.model.PlayerViewData
 
 class TeamSquadViewData private constructor(
-    val teamShortName: String,
+    val teamName: String,
+    val teamKey: String,
     val playingTeam: List<PlayerViewData>,
     val benchTeam: List<PlayerViewData>
 ) : BaseViewType {
@@ -14,12 +15,17 @@ class TeamSquadViewData private constructor(
         get() = ITEM_PLAYING_XI_TEAM
 
     class Builder {
-        private var teamShortName: String = ""
+        private var teamName: String = ""
+        private var teamKey: String = ""
         private var playingTeam: List<PlayerViewData> = emptyList()
         private var benchTeam: List<PlayerViewData> = emptyList()
 
-        fun teamShortName(teamShortName: String) = apply {
-            this.teamShortName = teamShortName
+        fun teamName(teamName: String) = apply {
+            this.teamName = teamName
+        }
+
+        fun teamKey(teamKey: String) = apply {
+            this.teamKey = teamKey
         }
 
         fun playingTeam(playingTeam: List<PlayerViewData>) = apply {
@@ -31,7 +37,8 @@ class TeamSquadViewData private constructor(
         }
 
         fun build() = TeamSquadViewData(
-            teamShortName,
+            teamName,
+            teamKey,
             playingTeam,
             benchTeam
         )
@@ -39,7 +46,8 @@ class TeamSquadViewData private constructor(
 
     fun toBuilder(): Builder {
         return Builder()
-            .teamShortName(teamShortName)
+            .teamName(teamName)
+            .teamKey(teamKey)
             .playingTeam(playingTeam)
             .benchTeam(benchTeam)
     }

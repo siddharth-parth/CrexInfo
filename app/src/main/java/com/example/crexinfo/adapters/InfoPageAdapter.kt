@@ -21,6 +21,7 @@ import com.example.crexinfo.databinding.ItemRecentMatchCardBinding
 import com.example.crexinfo.databinding.ItemSeeMoreFixturesBinding
 import com.example.crexinfo.databinding.ItemTeamComparisonBinding
 import com.example.crexinfo.databinding.ItemTeamRecentMatchesBinding
+import com.example.crexinfo.model.BaseViewType
 import com.example.crexinfo.model.ITEM_DIVIDER
 import com.example.crexinfo.model.ITEM_INFO_SECTION_TITLE
 import com.example.crexinfo.model.ITEM_MATCH_DETAILS
@@ -30,19 +31,11 @@ import com.example.crexinfo.model.ITEM_RECENT_MATCH_CARD
 import com.example.crexinfo.model.ITEM_SEE_MORE_FIXTURES
 import com.example.crexinfo.model.ITEM_TEAM_COMPARISON
 import com.example.crexinfo.model.ITEM_TEAM_RECENT_MATCHES
-import com.example.crexinfo.model.viewdatas.DividerViewData
-import com.example.crexinfo.model.viewdatas.DynamicListViewData
-import com.example.crexinfo.model.viewdatas.InfoSectionTitleViewData
-import com.example.crexinfo.model.viewdatas.MatchDetailsViewData
-import com.example.crexinfo.model.viewdatas.MatchEventViewData
-import com.example.crexinfo.model.viewdatas.TeamSquadViewData
-import com.example.crexinfo.model.viewdatas.RecentMatchInfoViewData
-import com.example.crexinfo.model.viewdatas.SeeMoreFixturesViewData
-import com.example.crexinfo.model.viewdatas.TeamComparisonViewData
-import com.example.crexinfo.model.viewdatas.TeamRecentMatchesViewData
 
-class InfoPageAdapter(private val items: List<DynamicListViewData>) :
+class InfoPageAdapter(private val infoPagerAdapterClickListener: InfoPageAdapterClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private val items: MutableList<BaseViewType> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -103,66 +96,47 @@ class InfoPageAdapter(private val items: List<DynamicListViewData>) :
 
         when (holder) {
             is ItemDividerViewHolder -> {
-                val data = items[position].data as? DividerViewData
-                    ?: throw IllegalArgumentException("Data cannot be null")
-
-                holder.bind(data)
+                holder.bind()
             }
 
             is ItemInfoSectionTitleViewHolder -> {
-                val data = items[position].data as? InfoSectionTitleViewData
-                    ?: throw IllegalArgumentException("Data cannot be null")
-
-                holder.bind(data)
+                holder.bind(items[position])
             }
 
             is ItemMatchDetailsViewHolder -> {
-                val data = items[position].data as? MatchDetailsViewData
-                    ?: throw IllegalArgumentException("Data cannot be null")
-
-                holder.bind(data)
+                holder.bind(items[position])
             }
 
             is ItemMatchEventViewHolder -> {
-                val data = items[position].data as? MatchEventViewData
-                    ?: throw IllegalArgumentException("Data cannot be null")
-
-                holder.bind(data)
+                holder.bind(items[position])
             }
 
             is ItemPlayingXITeamViewHolder -> {
-                val data = items[position].data as? TeamSquadViewData
-                    ?: throw IllegalArgumentException("Data cannot be null")
-
-                holder.bind(data)
+                holder.bind(
+                    position,
+                    items[position],
+                    infoPagerAdapterClickListener
+                )
             }
 
             is ItemRecentMatchCardViewHolder -> {
-                val data = items[position].data as? RecentMatchInfoViewData
-                    ?: throw IllegalArgumentException("Data cannot be null")
-
-                holder.bind(data)
+                holder.bind(items[position])
             }
 
             is ItemSeeMoreFixturesViewHolder -> {
-                val data = items[position].data as? SeeMoreFixturesViewData
-                    ?: throw IllegalArgumentException("Data cannot be null")
-
-                holder.bind(data)
+                holder.bind(items[position])
             }
 
             is ItemTeamComparisonViewHolder -> {
-                val data = items[position].data as? TeamComparisonViewData
-                    ?: throw IllegalArgumentException("Data cannot be null")
-
-                holder.bind(data)
+                holder.bind(items[position])
             }
 
             is ItemTeamRecentMatchesViewHolder -> {
-                val data = items[position].data as? TeamRecentMatchesViewData
-                    ?: throw IllegalArgumentException("Data cannot be null")
-
-                holder.bind(data)
+                holder.bind(
+                    position,
+                    items[position],
+                    infoPagerAdapterClickListener
+                )
             }
         }
     }
@@ -174,4 +148,40 @@ class InfoPageAdapter(private val items: List<DynamicListViewData>) :
     override fun getItemViewType(position: Int): Int {
         return items[position].viewType
     }
+
+    fun addItem(item: BaseViewType) {
+        items.add(item)
+        notifyItemInserted((items.size - 1))
+    }
+
+    fun addItemAtIndex(ind: Int, item: BaseViewType) {
+        items.add(ind, item)
+        notifyItemInserted(ind)
+    }
+
+    fun addItems(newItems: List<BaseViewType>) {
+        val oldInd = items.size
+        items.addAll(newItems)
+        notifyItemRangeInserted(oldInd, newItems.size)
+    }
+
+    fun addItemsAtIndex(ind: Int, newItems: List<BaseViewType>) {
+        items.addAll(ind, newItems)
+        notifyItemRangeInserted(ind, newItems.size)
+    }
+
+    fun removeItemsAtIndex(ind: Int, removedItems: List<BaseViewType>) {
+        items.removeAll(removedItems)
+        notifyItemRangeRemoved(ind, ind + (removedItems.size))
+    }
+
+    fun updateItemIndex(ind: Int, updatedItem: BaseViewType) {
+        items[ind] = updatedItem
+        notifyItemChanged(ind)
+    }
+}
+
+interface InfoPageAdapterClickListener {
+    fun onTeamFormExpanded(position: Int, viewData: BaseViewType)
+    fun onTeamPlayingXIOpened(position: Int, viewData: BaseViewType)
 }

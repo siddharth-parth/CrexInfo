@@ -12,7 +12,9 @@ class TeamComparisonStatsViewData private constructor(
     val teamTwoLowestScore: Int,
     val teamTwoMatches: Int,
     val teamTwoName: String,
-    val teamTwoMatchesWon: Int
+    val teamTwoMatchesWon: Int,
+    val teamOneKey: String,
+    val teamTwoKey: String,
 ) {
     class Builder {
         private var teamOneAvgScore: Float = 0f
@@ -27,6 +29,8 @@ class TeamComparisonStatsViewData private constructor(
         private var teamTwoMatches: Int = 0
         private var teamTwoName: String = ""
         private var teamTwoMatchesWon: Int = 0
+        private var teamOneKey: String = ""
+        private var teamTwoKey: String = ""
 
         fun teamOneAvgScore(teamOneAvgScore: Float) = apply {
             this.teamOneAvgScore = teamOneAvgScore
@@ -76,6 +80,14 @@ class TeamComparisonStatsViewData private constructor(
             this.teamTwoMatchesWon = teamTwoMatchesWon
         }
 
+        fun teamOneKey(teamOneKey: String) = apply {
+            this.teamOneKey = teamOneKey
+        }
+
+        fun teamTwoKey(teamTwoKey: String) = apply {
+            this.teamTwoKey = teamTwoKey
+        }
+
         fun build() = TeamComparisonStatsViewData(
             teamOneAvgScore,
             teamOneHighestScore,
@@ -88,7 +100,9 @@ class TeamComparisonStatsViewData private constructor(
             teamTwoLowestScore,
             teamTwoMatches,
             teamTwoName,
-            teamTwoMatchesWon
+            teamTwoMatchesWon,
+            teamOneKey,
+            teamTwoKey
         )
     }
 
@@ -106,5 +120,7 @@ class TeamComparisonStatsViewData private constructor(
             .teamTwoMatches(teamTwoMatches)
             .teamTwoName(teamTwoName)
             .teamTwoMatchesWon(teamTwoMatchesWon)
+            .teamOneKey(teamOneKey)
+            .teamTwoKey(teamTwoKey)
     }
 }

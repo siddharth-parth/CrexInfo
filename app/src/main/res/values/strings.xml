@@ -17,4 +17,10 @@
     <string name="overall">Overall</string>
     <string name="on_venue">On Venue</string>
     <string name="vs_all_teams">vs all teams</string>
+    <string name="win_percentage">%d%%</string>
+    <string name="matches_played">Matches Played</string>
+    <string name="win">Win</string>
+    <string name="avg_score">Avg Score</string>
+    <string name="highest_score">Highest Score</string>
+    <string name="lowest_score">Lowest Score</string>
 </resources>

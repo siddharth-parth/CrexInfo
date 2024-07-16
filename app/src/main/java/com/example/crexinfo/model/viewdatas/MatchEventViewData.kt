@@ -6,7 +6,7 @@ import com.example.crexinfo.model.ITEM_MATCH_EVENT
 class MatchEventViewData private constructor(
     val eventTime: String,
     val eventVenue: String,
-    val broadcaster: String
+    val broadcaster: String,
 ) : BaseViewType {
 
     override val viewType: Int
@@ -16,6 +16,7 @@ class MatchEventViewData private constructor(
         private var eventTime: String = ""
         private var eventVenue: String = ""
         private var broadcaster: String = ""
+        private var seriesKey: String = ""
 
         fun eventTime(eventTime: String) = apply {
             this.eventTime = eventTime
@@ -32,7 +33,7 @@ class MatchEventViewData private constructor(
         fun build() = MatchEventViewData(
             eventTime,
             eventVenue,
-            broadcaster
+            broadcaster,
         )
     }
 

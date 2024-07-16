@@ -23,11 +23,22 @@ object ViewDataConverter {
      */
     fun convertMatchInfo(matchInfoNetwork: MatchInfoNetwork): MatchInfoViewData {
         return MatchInfoViewData.Builder()
+            .teamOneShortName(matchInfoNetwork.teamOneShort)
+            .teamTwoShortName(matchInfoNetwork.teamTwoShort)
+            .teamOneKey(matchInfoNetwork.teamOneKey)
+            .teamTwoKey(matchInfoNetwork.teamTwoKey)
+            .matchTime(FormatHelper.extractTime(matchInfoNetwork.matchTime))
+            .matchDate(FormatHelper.extractDayAndMonthAbbreviation(matchInfoNetwork.matchTime))
             .matchDetails(convertMatchDetails(matchInfoNetwork))
             .matchEvent(convertMatchEvent(matchInfoNetwork))
             .teamsSquad(convertTeamsSquad(matchInfoNetwork))
             .teamsRecentMatches(convertTeamRecentMatches(matchInfoNetwork))
-            .teamsComparison(convertTeamComparison(matchInfoNetwork.teamComparison))
+            .teamsComparison(
+                convertTeamComparison(
+                    matchInfoNetwork.teamComparison,
+                    Pair(matchInfoNetwork.teamOneKey, matchInfoNetwork.teamTwoKey)
+                )
+            )
             .build()
     }
 
@@ -36,14 +47,9 @@ object ViewDataConverter {
      */
     private fun convertMatchDetails(matchInfoNetwork: MatchInfoNetwork): MatchDetailsViewData {
         return MatchDetailsViewData.Builder()
-            .teamOneShortName(matchInfoNetwork.teamOneShort)
-            .teamTwoShortName(matchInfoNetwork.teamTwoShort)
-            .teamOneKey(matchInfoNetwork.teamOneKey)
-            .teamTwoKey(matchInfoNetwork.teamTwoKey)
-            .matchTime(FormatHelper.extractTime(matchInfoNetwork.matchTime))
-            .matchDate(FormatHelper.extractDayAndMonthAbbreviation(matchInfoNetwork.matchTime))
             .matchNumber(matchInfoNetwork.matchNumber)
             .seriesName(matchInfoNetwork.seriesName)
+            .seriesKey(matchInfoNetwork.seriesKey)
             .build()
     }
 
@@ -64,12 +70,14 @@ object ViewDataConverter {
     private fun convertTeamsSquad(matchInfoNetwork: MatchInfoNetwork): List<TeamSquadViewData> {
         return listOf(
             TeamSquadViewData.Builder()
-                .teamShortName(matchInfoNetwork.teamOneShort)
+                .teamName(matchInfoNetwork.teamOneFull)
+                .teamKey(matchInfoNetwork.teamOneKey)
                 .playingTeam(convertPlayer(matchInfoNetwork.teamOnePlaying))
                 .benchTeam(convertPlayer(matchInfoNetwork.teamOneBench))
                 .build(),
             TeamSquadViewData.Builder()
-                .teamShortName(matchInfoNetwork.teamTwoShort)
+                .teamName(matchInfoNetwork.teamTwoFull)
+                .teamKey(matchInfoNetwork.teamTwoKey)
                 .playingTeam(convertPlayer(matchInfoNetwork.teamTwoPlaying))
                 .benchTeam(convertPlayer(matchInfoNetwork.teamTwoBench))
                 .build()
@@ -103,6 +111,7 @@ object ViewDataConverter {
         return listOf(
             TeamRecentMatchesViewData.Builder()
                 .teamShortName(matchInfoNetwork.teamOneShort)
+                .teamKey(matchInfoNetwork.teamOneKey)
                 .teamRecentMatchesInfo(
                     convertRecentMatchInfo(
                         matchInfoNetwork.teamOneRecentMatchesInfo,
@@ -116,9 +125,11 @@ object ViewDataConverter {
                             .build()
                     }
                 )
+                .isTeamOne(true)
                 .build(),
             TeamRecentMatchesViewData.Builder()
                 .teamShortName(matchInfoNetwork.teamTwoShort)
+                .teamKey(matchInfoNetwork.teamTwoKey)
                 .teamRecentMatchesInfo(
                     convertRecentMatchInfo(
                         matchInfoNetwork.teamTwoRecentMatchesInfo,
@@ -132,6 +143,7 @@ object ViewDataConverter {
                             .build()
                     }
                 )
+                .isTeamOne(false)
                 .build()
         )
     }
@@ -152,6 +164,8 @@ object ViewDataConverter {
                 .teamTwoName(recentMatchInfoNetwork.teamTwo)
                 .teamTwoOvers(recentMatchInfoNetwork.teamTwoOvers)
                 .teamTwoScore(recentMatchInfoNetwork.teamTwoScore)
+                .teamOneKey(recentMatchInfoNetwork.teamOneKey)
+                .teamTwoKey(recentMatchInfoNetwork.teamTwoKey)
                 .resultString(teamForm[ind])
                 .build()
         }
@@ -160,17 +174,23 @@ object ViewDataConverter {
     /**
      * converts [TeamComparisonNetwork] to [TeamComparisonViewData]
      */
-    private fun convertTeamComparison(teamComparisonNetwork: TeamComparisonNetwork): TeamComparisonViewData {
+    private fun convertTeamComparison(
+        teamComparisonNetwork: TeamComparisonNetwork,
+        teamKeys: Pair<String, String>
+    ): TeamComparisonViewData {
         return TeamComparisonViewData.Builder()
-            .overallStats(convertTeamComparisonStats(teamComparisonNetwork.overallStats))
-            .onVenueStats(convertTeamComparisonStats(teamComparisonNetwork.onVenueStats))
+            .overallStats(convertTeamComparisonStats(teamComparisonNetwork.overallStats, teamKeys))
+            .onVenueStats(convertTeamComparisonStats(teamComparisonNetwork.onVenueStats, teamKeys))
             .build()
     }
 
     /**
      * converts list of [TeamComparisonStatsNetwork] to [TeamComparisonViewData]
      */
-    private fun convertTeamComparisonStats(teamComparisonStatsNetwork: List<TeamComparisonStatsNetwork>): TeamComparisonStatsViewData {
+    private fun convertTeamComparisonStats(
+        teamComparisonStatsNetwork: List<TeamComparisonStatsNetwork>,
+        teamKeys: Pair<String, String>
+    ): TeamComparisonStatsViewData {
         val teamOneStats = teamComparisonStatsNetwork.first()
         val teamTwoStats = teamComparisonStatsNetwork[1]
 
@@ -187,6 +207,8 @@ object ViewDataConverter {
             .teamTwoMatches(teamTwoStats.matches)
             .teamTwoName(teamTwoStats.teamName)
             .teamTwoMatchesWon(teamTwoStats.won)
+            .teamOneKey(teamKeys.first)
+            .teamTwoKey(teamKeys.second)
             .build()
     }
 }

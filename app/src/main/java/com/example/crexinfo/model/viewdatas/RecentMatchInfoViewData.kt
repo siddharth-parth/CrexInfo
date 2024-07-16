@@ -11,7 +11,9 @@ class RecentMatchInfoViewData private constructor(
     val teamTwoName: String,
     val teamTwoOvers: String,
     val teamTwoScore: String,
-    val resultString: String
+    val resultString: String,
+    val teamOneKey: String,
+    val teamTwoKey: String
 ) : BaseViewType {
 
     override val viewType: Int
@@ -26,6 +28,8 @@ class RecentMatchInfoViewData private constructor(
         private var teamTwoOvers: String = ""
         private var teamTwoScore: String = ""
         private var resultString: String = ""
+        private var teamOneKey: String = ""
+        private var teamTwoKey: String = ""
 
         fun matchNumber(matchNumber: String) = apply {
             this.matchNumber = matchNumber
@@ -59,6 +63,14 @@ class RecentMatchInfoViewData private constructor(
             this.resultString = resultString
         }
 
+        fun teamOneKey(teamOneKey: String) = apply {
+            this.teamOneKey = teamOneKey
+        }
+
+        fun teamTwoKey(teamTwoKey: String) = apply {
+            this.teamTwoKey = teamTwoKey
+        }
+
         fun build() = RecentMatchInfoViewData(
             matchNumber,
             teamOneName,
@@ -67,7 +79,9 @@ class RecentMatchInfoViewData private constructor(
             teamTwoName,
             teamTwoOvers,
             teamTwoScore,
-            resultString
+            resultString,
+            teamOneKey,
+            teamTwoKey
         )
     }
 
@@ -81,5 +95,7 @@ class RecentMatchInfoViewData private constructor(
             .teamTwoOvers(teamTwoOvers)
             .teamTwoScore(teamTwoScore)
             .resultString(resultString)
+            .teamOneKey(teamOneKey)
+            .teamTwoKey(teamTwoKey)
     }
 }

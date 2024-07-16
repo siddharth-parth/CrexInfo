@@ -41,4 +41,6 @@ data class MatchInfoNetwork(
     val teamForm: String,
     @SerializedName("venue_name")
     val venueName: String,
+    @SerializedName("series_key")
+    val seriesKey: String,
 )

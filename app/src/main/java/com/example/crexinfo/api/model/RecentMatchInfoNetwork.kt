@@ -17,4 +17,8 @@ data class RecentMatchInfoNetwork(
     val teamTwoOvers: String,
     @SerializedName("team2_score")
     val teamTwoScore: String,
+    @SerializedName("team1_key")
+    val teamOneKey: String,
+    @SerializedName("team2_key")
+    val teamTwoKey: String,
 )
