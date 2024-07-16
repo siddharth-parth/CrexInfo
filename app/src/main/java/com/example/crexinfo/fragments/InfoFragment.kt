@@ -18,6 +18,7 @@ import com.example.crexinfo.model.BaseViewType
 import com.example.crexinfo.model.viewdatas.DividerViewData
 import com.example.crexinfo.model.viewdatas.InfoSectionTitleViewData
 import com.example.crexinfo.model.viewdatas.MatchInfoViewData
+import com.example.crexinfo.model.viewdatas.SeeMoreFixturesViewData
 import com.example.crexinfo.model.viewdatas.TeamRecentMatchesViewData
 import com.example.crexinfo.repository.MatchInfoRepository
 import com.example.crexinfo.viewmodel.InfoViewModel
@@ -129,16 +130,20 @@ class InfoFragment : Fragment(), InfoPageAdapterClickListener {
         }
         val teamRecentMatchesInfo = (matchData.teamsRecentMatches[teamInd]).teamRecentMatchesInfo
 
-        val updatedIsExpanded = if (data.isExpanded) {
-            infoAdapter.removeItemsAtIndex(position + 1, teamRecentMatchesInfo)
-            false
+        if (data.isExpanded) {
+            val seeMoreViewData =
+                infoAdapter.getItemAtIndex(position + teamRecentMatchesInfo.size + 1)
+            val removeItems = (teamRecentMatchesInfo as List<BaseViewType>).toMutableList()
+            removeItems.add(seeMoreViewData)
+            infoAdapter.removeItemsAtIndex(position + 1, removeItems)
         } else {
-            infoAdapter.addItemsAtIndex(position + 1, teamRecentMatchesInfo)
-            true
+            val addItems = (teamRecentMatchesInfo as List<BaseViewType>).toMutableList()
+            addItems.add(SeeMoreFixturesViewData.Builder().build())
+            infoAdapter.addItemsAtIndex(position + 1, addItems)
         }
 
         val updatedViewData = data.toBuilder()
-            .isExpanded(updatedIsExpanded)
+            .isExpanded(!data.isExpanded)
             .build()
 
         infoAdapter.updateItemIndex(
@@ -148,6 +153,6 @@ class InfoFragment : Fragment(), InfoPageAdapterClickListener {
     }
 
     override fun onTeamPlayingXIOpened(position: Int, viewData: BaseViewType) {
-
+        //todo:
     }
 }

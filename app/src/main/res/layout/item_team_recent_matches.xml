@@ -32,6 +32,7 @@
             tools:text="PBKS" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_team_form"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"

@@ -7,4 +7,12 @@ class SeeMoreFixturesViewData : BaseViewType {
 
     override val viewType: Int
         get() = ITEM_SEE_MORE_FIXTURES
+
+    class Builder {
+        fun build() = SeeMoreFixturesViewData()
+    }
+
+    fun toBuilder(): Builder {
+        return Builder()
+    }
 }

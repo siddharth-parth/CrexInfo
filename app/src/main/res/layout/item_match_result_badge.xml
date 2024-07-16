@@ -10,6 +10,7 @@
         app:cardCornerRadius="4dp">
 
         <TextView
+            android:id="@+id/tv_result_badge"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@color/ce_highlight_ac4"

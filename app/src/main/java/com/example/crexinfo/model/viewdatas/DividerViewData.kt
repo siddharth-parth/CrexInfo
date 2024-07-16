@@ -11,4 +11,8 @@ class DividerViewData : BaseViewType {
     class Builder {
         fun build() = DividerViewData()
     }
+
+    fun toBuilder(): Builder {
+        return Builder()
+    }
 }

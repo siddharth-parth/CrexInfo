@@ -1,8 +1,10 @@
 package com.example.crexinfo.adapters.viewholders
 
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.crexinfo.adapters.InfoPageAdapterClickListener
+import com.example.crexinfo.adapters.ResultBadgeAdapter
 import com.example.crexinfo.databinding.ItemTeamRecentMatchesBinding
 import com.example.crexinfo.helper.FormatHelper.getTeamLogo
 import com.example.crexinfo.helper.ViewHelper
@@ -18,6 +20,7 @@ class ItemTeamRecentMatchesViewHolder(private val binding: ItemTeamRecentMatches
         infoPageAdapterClickListener: InfoPageAdapterClickListener
     ) {
         binding.apply {
+            val context = root.context
             val data = viewData as? TeamRecentMatchesViewData ?: return@apply
 
             tvTeam.text = data.teamShortName
@@ -27,7 +30,9 @@ class ItemTeamRecentMatchesViewHolder(private val binding: ItemTeamRecentMatches
                 .placeholder(ViewHelper.getShimmer())
                 .into(ivTeam)
 
-            //TODO: form recyclerview
+            rvTeamForm.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            rvTeamForm.adapter = ResultBadgeAdapter(data.teamForm)
 
             root.setOnClickListener {
                 infoPageAdapterClickListener.onTeamFormExpanded(

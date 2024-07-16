@@ -179,6 +179,10 @@ class InfoPageAdapter(private val infoPagerAdapterClickListener: InfoPageAdapter
         items[ind] = updatedItem
         notifyItemChanged(ind)
     }
+
+    fun getItemAtIndex(ind: Int): BaseViewType {
+        return items[ind]
+    }
 }
 
 interface InfoPageAdapterClickListener {
