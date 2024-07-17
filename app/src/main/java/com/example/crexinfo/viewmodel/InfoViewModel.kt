@@ -1,6 +1,7 @@
 package com.example.crexinfo.viewmodel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.crexinfo.model.viewdatas.MatchInfoViewData
@@ -11,17 +12,22 @@ import kotlinx.coroutines.launch
 class InfoViewModel(private val infoRepository: MatchInfoRepository) :
     ViewModel() {
 
-    val infoLiveData: LiveData<MatchInfoViewData> = infoRepository.infoLiveData
+    private val _infoLiveData: MutableLiveData<MatchInfoViewData> = MutableLiveData()
+    val infoLiveData: LiveData<MatchInfoViewData> = _infoLiveData
 
     fun fetchInfo() {
         viewModelScope.launch(Dispatchers.IO) {
-            infoRepository.fetchData()
+            infoRepository.fetchData().collect { matchInfo ->
+                _infoLiveData.postValue(matchInfo)
+            }
         }
     }
 
     fun fetchInfoFromFirebase() {
         viewModelScope.launch(Dispatchers.IO) {
-            infoRepository.fetchDataFromFirebase()
+            infoRepository.fetchDataFromFirebase().collect { matchInfo ->
+                _infoLiveData.postValue(matchInfo)
+            }
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.example.crexinfo.repository
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
@@ -11,20 +10,19 @@ import com.example.crexinfo.model.viewdatas.MatchInfoViewData
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.gson.Gson
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 
 
 class MatchInfoRepository(private val requestQueue: RequestQueue) {
-
-    val infoLiveData = MutableLiveData<MatchInfoViewData>()
 
     companion object {
         private const val MATCH_INFO_REF = "match_info"
     }
 
-    suspend fun fetchData() {
-        withContext(Dispatchers.IO) {
+    fun fetchData(): Flow<MatchInfoViewData> {
+        return callbackFlow {
             val request = JsonObjectRequest(
                 Request.Method.GET,
                 "https://cricket-exchange-testing.firebaseio.com/match/info.json",
@@ -32,18 +30,19 @@ class MatchInfoRepository(private val requestQueue: RequestQueue) {
                 { response ->
                     val gson = Gson()
                     val infoData = gson.fromJson(response.toString(), MatchInfoNetwork::class.java)
-                    infoLiveData.postValue(ViewDataConverter.convertMatchInfo(infoData))
+                    trySend(ViewDataConverter.convertMatchInfo(infoData))
                 },
                 { error ->
                     Log.e("CrexInfo", "API failed due to error: ", error.cause)
                 }
             )
             requestQueue.add(request)
+            awaitClose {  }
         }
     }
 
-    suspend fun fetchDataFromFirebase() {
-        withContext(Dispatchers.IO) {
+    fun fetchDataFromFirebase(): Flow<MatchInfoViewData> {
+        return callbackFlow {
             try {
                 val rootRef: DatabaseReference = FirebaseDatabase.getInstance().reference
                 val matchInfoRef: DatabaseReference = rootRef.child(MATCH_INFO_REF)
@@ -55,7 +54,7 @@ class MatchInfoRepository(private val requestQueue: RequestQueue) {
                             val jsonObject = gson.toJsonTree(result.value).asJsonObject
                             val jsonString = gson.toJson(jsonObject)
                             val person = gson.fromJson(jsonString, MatchInfoNetwork::class.java)
-                            infoLiveData.postValue(ViewDataConverter.convertMatchInfo(person))
+                            trySend(ViewDataConverter.convertMatchInfo(person))
                         }
                     } else {
                         Log.e("CrexInfo", "Fetching data failed due to ${task.exception?.message}")
@@ -64,6 +63,7 @@ class MatchInfoRepository(private val requestQueue: RequestQueue) {
             } catch (exception: Exception) {
                 Log.e("CrexInfo", "Fetching data failed due to: ${exception.message}")
             }
+            awaitClose {  }
         }
     }
 }
