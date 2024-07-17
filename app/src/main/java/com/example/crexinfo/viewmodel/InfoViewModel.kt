@@ -18,4 +18,10 @@ class InfoViewModel(private val infoRepository: MatchInfoRepository) :
             infoRepository.fetchData()
         }
     }
+
+    fun fetchInfoFromFirebase() {
+        viewModelScope.launch(Dispatchers.IO) {
+            infoRepository.fetchDataFromFirebase()
+        }
+    }
 }

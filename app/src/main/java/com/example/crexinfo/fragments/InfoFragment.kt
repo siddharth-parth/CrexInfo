@@ -96,7 +96,7 @@ class InfoFragment : Fragment(), InfoPageAdapterClickListener {
     }
 
     private fun fetchData() {
-        viewModel.fetchInfo()
+        viewModel.fetchInfoFromFirebase()
     }
 
     private fun setMatchDetails(matchInfo: MatchInfoViewData) {

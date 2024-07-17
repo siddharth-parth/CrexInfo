@@ -2,6 +2,7 @@ package com.example.crexinfo
 
 import android.app.Application
 import com.example.crexinfo.api.CrexVolley
+import com.google.firebase.FirebaseApp
 
 class CrexInfoApplication : Application() {
 
@@ -9,5 +10,6 @@ class CrexInfoApplication : Application() {
         super.onCreate()
 
         CrexVolley.getInstance(applicationContext)
+        FirebaseApp.initializeApp(this)
     }
 }

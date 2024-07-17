@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "240593394109",
+    "firebase_url": "https://crexinfo-default-rtdb.firebaseio.com",
+    "project_id": "crexinfo",
+    "storage_bucket": "crexinfo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240593394109:android:9f70efe83fa5c392a99ad4",
+        "android_client_info": {
+          "package_name": "com.example.crexinfo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAao5pAvC_jdcoNtUgXO5mS76sawcO8UPQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
