@@ -19,4 +19,7 @@
     <color name="milano_red">#AA0707</color>
     <color name="ce_highlight_ac6">#6CB240</color>
     <color name="wild_sand">#f5f5f5</color>
+    <color name="ce_stroke_2">#EDEDED</color>
+    <color name="ce_highlight_ac1">#AA0707</color>
+    <color name="ce_highlight_ac2">#9E6105</color>
 </resources>

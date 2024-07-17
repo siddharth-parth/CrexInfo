@@ -1,5 +1,9 @@
 package com.example.crexinfo.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 class PlayerViewData private constructor(
     val isCaptain: Boolean,
     val isWicketKeeper: Boolean,
@@ -7,7 +11,11 @@ class PlayerViewData private constructor(
     val playerName: String,
     val role: String,
     val teamKey: String
-) {
+) : Parcelable, BaseViewType {
+
+    override val viewType: Int
+        get() = ITEM_BOTTOM_SHEET_PLAYER
+
     class Builder {
         private var isCaptain: Boolean = false
         private var isWicketKeeper: Boolean = false

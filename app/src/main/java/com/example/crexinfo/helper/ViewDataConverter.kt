@@ -71,6 +71,7 @@ object ViewDataConverter {
         return listOf(
             TeamSquadViewData.Builder()
                 .teamName(matchInfoNetwork.teamOneFull)
+                .teamShortName(matchInfoNetwork.teamOneShort)
                 .teamKey(matchInfoNetwork.teamOneKey)
                 .playingTeam(convertPlayer(matchInfoNetwork.teamOnePlaying))
                 .benchTeam(convertPlayer(matchInfoNetwork.teamOneBench))
@@ -78,6 +79,7 @@ object ViewDataConverter {
             TeamSquadViewData.Builder()
                 .teamName(matchInfoNetwork.teamTwoFull)
                 .teamKey(matchInfoNetwork.teamTwoKey)
+                .teamShortName(matchInfoNetwork.teamTwoShort)
                 .playingTeam(convertPlayer(matchInfoNetwork.teamTwoPlaying))
                 .benchTeam(convertPlayer(matchInfoNetwork.teamTwoBench))
                 .build()

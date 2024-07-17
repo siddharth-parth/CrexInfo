@@ -1,5 +1,7 @@
 package com.example.crexinfo.helper
 
+import android.content.Context
+import android.util.TypedValue
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerDrawable
 
@@ -21,5 +23,13 @@ object ViewHelper {
             setShimmer(shimmer)
         }
         return shimmerDrawable
+    }
+
+    fun pxToDp(context: Context, px: Float): Int {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            px,
+            context.resources.displayMetrics
+        ).toInt()
     }
 }

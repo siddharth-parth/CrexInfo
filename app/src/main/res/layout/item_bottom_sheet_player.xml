@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/fl_player_image"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@color/white"
+            app:cardCornerRadius="48dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/ce_stroke_2"
+            app:strokeWidth="1dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+                <ImageView
+                    android:id="@+id/iv_player_head"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/sample_player_head" />
+
+                <ImageView
+                    android:id="@+id/iv_team_jersey"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="-26dp"
+                    android:translationZ="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_player_head"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/sample_team_jersey" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tv_player_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/abc_diatype_medium"
+            android:textColor="@color/ce_primary_text_color"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_player_role"
+            app:layout_constraintStart_toEndOf="@id/fl_player_image"
+            app:layout_constraintTop_toTopOf="@id/fl_player_image"
+            tools:text="R Sharma (c)" />
+
+        <TextView
+            android:id="@+id/tv_player_role"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/abc_diatype_regular"
+            android:textColor="@color/ce_secondary_text_color"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/fl_player_image"
+            app:layout_constraintStart_toStartOf="@id/tv_player_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_player_name"
+            tools:text="RH Bat" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

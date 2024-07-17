@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crexinfo.adapters.viewholders.ItemDividerViewHolder
-import com.example.crexinfo.adapters.viewholders.ItemInfoSectionTitleViewHolder
+import com.example.crexinfo.adapters.viewholders.ItemSectionTitleViewHolder
 import com.example.crexinfo.adapters.viewholders.ItemMatchDetailsViewHolder
 import com.example.crexinfo.adapters.viewholders.ItemMatchEventViewHolder
 import com.example.crexinfo.adapters.viewholders.ItemPlayingXITeamViewHolder
@@ -13,7 +13,7 @@ import com.example.crexinfo.adapters.viewholders.ItemSeeMoreFixturesViewHolder
 import com.example.crexinfo.adapters.viewholders.ItemTeamComparisonViewHolder
 import com.example.crexinfo.adapters.viewholders.ItemTeamRecentMatchesViewHolder
 import com.example.crexinfo.databinding.ItemDividerBinding
-import com.example.crexinfo.databinding.ItemInfoSectionTitleBinding
+import com.example.crexinfo.databinding.ItemSectionTitleBinding
 import com.example.crexinfo.databinding.ItemMatchDetailsBinding
 import com.example.crexinfo.databinding.ItemMatchEventBinding
 import com.example.crexinfo.databinding.ItemPlayingXiTeamBinding
@@ -23,7 +23,7 @@ import com.example.crexinfo.databinding.ItemTeamComparisonBinding
 import com.example.crexinfo.databinding.ItemTeamRecentMatchesBinding
 import com.example.crexinfo.model.BaseViewType
 import com.example.crexinfo.model.ITEM_DIVIDER
-import com.example.crexinfo.model.ITEM_INFO_SECTION_TITLE
+import com.example.crexinfo.model.ITEM_SECTION_TITLE
 import com.example.crexinfo.model.ITEM_MATCH_DETAILS
 import com.example.crexinfo.model.ITEM_MATCH_EVENT
 import com.example.crexinfo.model.ITEM_PLAYING_XI_TEAM
@@ -51,9 +51,9 @@ class InfoPageAdapter(private val infoPagerAdapterClickListener: InfoPageAdapter
                 ItemMatchEventViewHolder(binding)
             }
 
-            ITEM_INFO_SECTION_TITLE -> {
-                val binding = ItemInfoSectionTitleBinding.inflate(inflater, parent, false)
-                ItemInfoSectionTitleViewHolder(binding)
+            ITEM_SECTION_TITLE -> {
+                val binding = ItemSectionTitleBinding.inflate(inflater, parent, false)
+                ItemSectionTitleViewHolder(binding)
             }
 
             ITEM_PLAYING_XI_TEAM -> {
@@ -99,7 +99,7 @@ class InfoPageAdapter(private val infoPagerAdapterClickListener: InfoPageAdapter
                 holder.bind()
             }
 
-            is ItemInfoSectionTitleViewHolder -> {
+            is ItemSectionTitleViewHolder -> {
                 holder.bind(items[position])
             }
 

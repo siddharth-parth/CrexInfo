@@ -16,8 +16,8 @@ import com.example.crexinfo.helper.FormatHelper.getTeamLogo
 import com.example.crexinfo.helper.ViewHelper
 import com.example.crexinfo.model.BaseViewType
 import com.example.crexinfo.model.viewdatas.DividerViewData
-import com.example.crexinfo.model.viewdatas.InfoSectionTitleViewData
 import com.example.crexinfo.model.viewdatas.MatchInfoViewData
+import com.example.crexinfo.model.viewdatas.SectionTitleViewData
 import com.example.crexinfo.model.viewdatas.SeeMoreFixturesViewData
 import com.example.crexinfo.model.viewdatas.TeamRecentMatchesViewData
 import com.example.crexinfo.repository.MatchInfoRepository
@@ -75,14 +75,14 @@ class InfoFragment : Fragment(), InfoPageAdapterClickListener {
                 listOf(
                     response.matchDetails,
                     response.matchEvent,
-                    InfoSectionTitleViewData.Builder()
+                    SectionTitleViewData.Builder()
                         .title("Playing XI")
                         .build(),
                     response.teamsSquad[0],
                     DividerViewData.Builder().build(),
                     response.teamsSquad[1],
                     DividerViewData.Builder().build(),
-                    InfoSectionTitleViewData.Builder()
+                    SectionTitleViewData.Builder()
                         .title("Team Form")
                         .build(),
                     response.teamsRecentMatches[0],
@@ -166,6 +166,14 @@ class InfoFragment : Fragment(), InfoPageAdapterClickListener {
     }
 
     override fun onTeamPlayingXIOpened(position: Int, viewData: BaseViewType) {
-        //todo:
+        val teamInd = if (position == 3) {
+            0
+        } else {
+            1
+        }
+        PlayersBottomSheetDialogFragment(teamInd, (matchInfoData?.teamsSquad) ?: emptyList()).show(
+            childFragmentManager,
+            "PlayersBottomSheetDialogFragment"
+        )
     }
 }

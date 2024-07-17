@@ -58,12 +58,12 @@ class ItemTeamComparisonViewHolder(private val binding: ItemTeamComparisonBindin
     ) {
         val context = activeButton.context
 
-        activeButton.setBackgroundResource(R.drawable.ic_rounded_corners_8dp)
+        activeButton.setBackgroundResource(R.drawable.bg_rounded_corners_8dp)
         activeButton.backgroundTintList =
             ColorStateList.valueOf(ContextCompat.getColor(context, R.color.venice_blue))
         activeButton.setTextColor(ContextCompat.getColor(context, R.color.white))
 
-        inActiveButton.setBackgroundResource(R.drawable.ic_rounded_corners_8dp_stoke_1dp)
+        inActiveButton.setBackgroundResource(R.drawable.bg_rounded_corners_8dp_stoke_1dp)
         inActiveButton.backgroundTintList =
             ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white))
         inActiveButton.setTextColor(ContextCompat.getColor(context, R.color.tundora))
