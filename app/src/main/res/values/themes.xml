@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.CrexInfo" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
@@ -6,4 +6,16 @@
     </style>
 
     <style name="Theme.CrexInfo" parent="Base.Theme.CrexInfo" />
+
+    <style name="MainTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/euclid_circular_a_medium</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="SquadTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/abc_diatype_medium</item>
+        <item name="textAllCaps">true</item>
+    </style>
 </resources>

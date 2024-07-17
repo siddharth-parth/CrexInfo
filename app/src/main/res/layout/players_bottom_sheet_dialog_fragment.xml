@@ -41,6 +41,7 @@
             app:tabIndicatorColor="@color/ce_highlight_ac1"
             app:tabIndicatorHeight="1dp"
             app:tabMode="scrollable"
+            app:tabTextAppearance="@style/SquadTabTextAppearance"
             app:tabSelectedTextColor="@color/ce_primary_text_color"
             app:tabTextColor="@color/ce_secondary_text_color" />
 
@@ -49,7 +50,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tl_squad"
