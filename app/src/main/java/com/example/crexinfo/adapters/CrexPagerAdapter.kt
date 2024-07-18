@@ -19,6 +19,7 @@ class CrexPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activ
         return CREX_TAB_LAYOUT_ITEMS_COUNT
     }
 
+    // creates a returns the fragment as per the tab position
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> {

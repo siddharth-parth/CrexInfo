@@ -5,10 +5,9 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.crexinfo.R
 import com.example.crexinfo.databinding.ItemTeamComparisonBinding
-import com.example.crexinfo.helper.FormatHelper.getTeamLogo
+import com.example.crexinfo.helper.FormatHelper.getTeamLogoUrl
 import com.example.crexinfo.helper.ViewHelper
 import com.example.crexinfo.model.BaseViewType
 import com.example.crexinfo.model.viewdatas.TeamComparisonStatsViewData
@@ -17,6 +16,7 @@ import com.example.crexinfo.model.viewdatas.TeamComparisonViewData
 class ItemTeamComparisonViewHolder(private val binding: ItemTeamComparisonBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
+    // binds data to the view if any
     fun bind(viewData: BaseViewType) {
         binding.apply {
             val data = viewData as? TeamComparisonViewData ?: return@apply
@@ -52,6 +52,7 @@ class ItemTeamComparisonViewHolder(private val binding: ItemTeamComparisonBindin
         }
     }
 
+    // sets color to the active/inactive button
     private fun configureButton(
         activeButton: AppCompatButton,
         inActiveButton: AppCompatButton
@@ -69,6 +70,7 @@ class ItemTeamComparisonViewHolder(private val binding: ItemTeamComparisonBindin
         inActiveButton.setTextColor(ContextCompat.getColor(context, R.color.tundora))
     }
 
+    // sets the data to the team stats text
     private fun setData(stats: TeamComparisonStatsViewData) {
         binding.apply {
             val context = root.context
@@ -76,20 +78,26 @@ class ItemTeamComparisonViewHolder(private val binding: ItemTeamComparisonBindin
             tvTeamOne.text = stats.teamOneName
             tvTeamTwo.text = stats.teamTwoName
 
-            Glide.with(context)
-                .load(stats.teamOneKey.getTeamLogo())
-                .placeholder(ViewHelper.getShimmer())
-                .into(ivTeamOne)
+            // sets team logo to the first team logo image view
+            ViewHelper.loadImage(
+                ivTeamOne,
+                stats.teamOneKey.getTeamLogoUrl(),
+                ViewHelper.getShimmer()
+            )
 
-            Glide.with(context)
-                .load(stats.teamTwoKey.getTeamLogo())
-                .placeholder(ViewHelper.getShimmer())
-                .into(ivTeamTwo)
+            // sets team logo to the second team logo image view
+            ViewHelper.loadImage(
+                ivTeamTwo,
+                stats.teamTwoKey.getTeamLogoUrl(),
+                ViewHelper.getShimmer()
+            )
 
+            // sets matches player stat data
             layoutMatchesPlayedStat.tvStatTitle.text = context.getString(R.string.matches_played)
             layoutMatchesPlayedStat.tvTeamOneStat.text = stats.teamOneMatches.toString()
             layoutMatchesPlayedStat.tvTeamTwoStat.text = stats.teamTwoMatches.toString()
 
+            // sets win percentage stats data
             val teamOneWinPercentage =
                 ((stats.teamOneMatchesWon * 1.0f / stats.teamOneMatches) * 100).toInt()
             val teamTwoWinPercentage =
@@ -105,23 +113,28 @@ class ItemTeamComparisonViewHolder(private val binding: ItemTeamComparisonBindin
                 teamTwoWinPercentage,
             )
 
+            // sets the color of the win percentage stats text
             if (teamTwoWinPercentage > teamOneWinPercentage) {
                 configureStatsText(
                     layoutMatchesWinStat.tvTeamTwoStat,
                     layoutMatchesWinStat.tvTeamOneStat,
-                    from = 0
                 )
             } else {
                 configureStatsText(
                     layoutMatchesWinStat.tvTeamOneStat,
                     layoutMatchesWinStat.tvTeamTwoStat,
-                    from = 0
                 )
             }
 
+            // sets team avg score stats data
             val teamOneAvg = stats.teamOneAvgScore.toInt()
             val teamTwoAvg = stats.teamTwoAvgScore.toInt()
 
+            layoutAvgScoreStat.tvStatTitle.text = context.getString(R.string.avg_score)
+            layoutAvgScoreStat.tvTeamOneStat.text = teamOneAvg.toString()
+            layoutAvgScoreStat.tvTeamTwoStat.text = teamTwoAvg.toString()
+
+            // sets the color of the team avg score stats text
             if (teamTwoAvg > teamOneAvg) {
                 configureStatsText(
                     layoutAvgScoreStat.tvTeamTwoStat,
@@ -133,13 +146,16 @@ class ItemTeamComparisonViewHolder(private val binding: ItemTeamComparisonBindin
                     layoutAvgScoreStat.tvTeamTwoStat
                 )
             }
-            layoutAvgScoreStat.tvStatTitle.text = context.getString(R.string.avg_score)
-            layoutAvgScoreStat.tvTeamOneStat.text = teamOneAvg.toString()
-            layoutAvgScoreStat.tvTeamTwoStat.text = teamTwoAvg.toString()
 
+            // sets team highest score stats data
             val teamOneHighest = stats.teamOneHighestScore
             val teamTwoHighest = stats.teamTwoHighestScore
 
+            layoutHighestScoreStat.tvStatTitle.text = context.getString(R.string.highest_score)
+            layoutHighestScoreStat.tvTeamOneStat.text = teamOneHighest.toString()
+            layoutHighestScoreStat.tvTeamTwoStat.text = teamTwoHighest.toString()
+
+            // sets the color of the team highest score stats text
             if (teamTwoHighest > teamOneHighest) {
                 configureStatsText(
                     layoutHighestScoreStat.tvTeamTwoStat,
@@ -151,13 +167,16 @@ class ItemTeamComparisonViewHolder(private val binding: ItemTeamComparisonBindin
                     layoutHighestScoreStat.tvTeamTwoStat
                 )
             }
-            layoutHighestScoreStat.tvStatTitle.text = context.getString(R.string.highest_score)
-            layoutHighestScoreStat.tvTeamOneStat.text = teamOneHighest.toString()
-            layoutHighestScoreStat.tvTeamTwoStat.text = teamTwoHighest.toString()
 
+            // sets team lowest score stats data
             val teamOneLowest = stats.teamOneLowestScore
             val teamTwoLowest = stats.teamTwoLowestScore
 
+            layoutLowestScoreStat.tvStatTitle.text = context.getString(R.string.lowest_score)
+            layoutLowestScoreStat.tvTeamOneStat.text = stats.teamOneLowestScore.toString()
+            layoutLowestScoreStat.tvTeamTwoStat.text = stats.teamTwoLowestScore.toString()
+
+            // sets the color of the team lowest score stats text
             if (teamOneLowest > teamTwoLowest) {
                 configureStatsText(
                     layoutLowestScoreStat.tvTeamTwoStat,
@@ -171,21 +190,19 @@ class ItemTeamComparisonViewHolder(private val binding: ItemTeamComparisonBindin
                     isActiveRed = true
                 )
             }
-            layoutLowestScoreStat.tvStatTitle.text = context.getString(R.string.lowest_score)
-            layoutLowestScoreStat.tvTeamOneStat.text = stats.teamOneLowestScore.toString()
-            layoutLowestScoreStat.tvTeamTwoStat.text = stats.teamTwoLowestScore.toString()
         }
     }
 
+    // updates color of the stat text
     private fun configureStatsText(
         activeText: TextView,
         inActiveText: TextView,
         isActiveRed: Boolean = false,
-        from: Int = 1
     ) {
         val context = activeText.context
 
         if (isActiveRed) {
+            // sets [milano_red] to the active text if the color of active text is red
             activeText.setTextColor(
                 ContextCompat.getColor(
                     context,
@@ -193,6 +210,7 @@ class ItemTeamComparisonViewHolder(private val binding: ItemTeamComparisonBindin
                 )
             )
         } else {
+            // sets [la_palma] to the active text if the color of active text is not red
             activeText.setTextColor(
                 ContextCompat.getColor(
                     context,
@@ -201,6 +219,7 @@ class ItemTeamComparisonViewHolder(private val binding: ItemTeamComparisonBindin
             )
         }
 
+        // sets [black] to the inactive text
         inActiveText.setTextColor(
             ContextCompat.getColor(
                 context,

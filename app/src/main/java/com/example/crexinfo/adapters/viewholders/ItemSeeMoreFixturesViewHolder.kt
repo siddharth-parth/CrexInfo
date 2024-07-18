@@ -8,6 +8,7 @@ import com.example.crexinfo.model.viewdatas.SeeMoreFixturesViewData
 class ItemSeeMoreFixturesViewHolder(binding: ItemSeeMoreFixturesBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
+    // binds data to the view if any
     fun bind(viewData: BaseViewType) {
         //TODO:
         val data = viewData as? SeeMoreFixturesViewData ?: return

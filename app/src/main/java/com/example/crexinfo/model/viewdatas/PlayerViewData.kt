@@ -1,6 +1,8 @@
-package com.example.crexinfo.model
+package com.example.crexinfo.model.viewdatas
 
 import android.os.Parcelable
+import com.example.crexinfo.model.BaseViewType
+import com.example.crexinfo.model.ITEM_BOTTOM_SHEET_PLAYER
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

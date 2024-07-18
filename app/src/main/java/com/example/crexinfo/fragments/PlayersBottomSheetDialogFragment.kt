@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.GestureDetector
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.LayoutInflater
@@ -81,20 +80,21 @@ class PlayersBottomSheetDialogFragment(
         initClickListeners()
     }
 
+    // setups the tab layout
     private fun setupTabLayout() {
         binding.apply {
             val teamSquadTabs = listOf(tlSquad.newTab(), tlSquad.newTab())
 
+            // add the tabs in the tab layout
             tlSquad.addTab(teamSquadTabs[0].setText(teamsSquad[0].teamShortName))
             tlSquad.addTab(teamSquadTabs[1].setText(teamsSquad[1].teamShortName))
 
+            // selects the item on which user clicked
             tlSquad.selectTab(teamSquadTabs[currentPos])
 
-            Log.d("PUI", "setupTabLayout: ${tlSquad.tabCount}")
-            // Tab selection listener
+            // adds a tab selection listener to the tab layout
             tlSquad.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
-                    Log.d("PUI", "onTabSelected: ${tab.position}")
                     replaceItemsInRV(tab.position)
                 }
 
@@ -107,7 +107,7 @@ class PlayersBottomSheetDialogFragment(
     @SuppressLint("ClickableViewAccessibility")
     private fun setupRecyclerView() {
         binding.apply {
-            // gesture detector to enable swipe behaviour
+            // gesture detector to enable swipe behaviour in the sheet fragment
             val gestureDetector =
                 GestureDetector(requireContext(), object : SimpleOnGestureListener() {
                     override fun onFling(
@@ -150,18 +150,22 @@ class PlayersBottomSheetDialogFragment(
                 gestureDetector.onTouchEvent(event)
             }
 
+            // attaches the adapter to the recyclerview
             playersAdapter = PlayersAdapter()
             rvPlayers.adapter = playersAdapter
+            // sets the data of team 1 to the recycler view by default
             replaceItemsInRV(0)
         }
     }
 
+    // initializes the click listeners
     private fun initClickListeners() {
         binding.ivCross.setOnClickListener {
             this.dismiss()
         }
     }
 
+    // replaces the item in the rv when the selected team is switched
     private fun replaceItemsInRV(position: Int) {
         val items = (teamsSquad[position].playingTeam as List<BaseViewType>).toMutableList()
         items.add(SectionTitleViewData.Builder().title("On Bench").build())

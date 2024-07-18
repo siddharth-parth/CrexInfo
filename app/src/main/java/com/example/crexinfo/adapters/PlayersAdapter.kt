@@ -17,8 +17,10 @@ import com.example.crexinfo.model.ITEM_SECTION_TITLE
 
 class PlayersAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    // holds the items for the recycler view
     private var items: MutableList<BaseViewType> = mutableListOf()
 
+    // returns the view holder for the recycler item based on the view type
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
 
@@ -34,12 +36,12 @@ class PlayersAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
 
             else -> {
-                Log.d("PUI", "onCreateViewHolder: $viewType")
                 throw IllegalArgumentException("Invalid view type")
             }
         }
     }
 
+    // binds the data to the recyclerview item based on the view type
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val layoutParams = StaggeredGridLayoutManager.LayoutParams(holder.itemView.layoutParams)
         val context = holder.itemView.context
@@ -48,6 +50,7 @@ class PlayersAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             is ItemSectionTitleViewHolder -> {
                 layoutParams.topMargin = ViewHelper.pxToDp(context, 24f)
                 layoutParams.isFullSpan = true
+
                 holder.bind(items[position])
             }
 

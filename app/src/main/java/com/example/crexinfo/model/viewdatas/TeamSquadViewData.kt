@@ -3,7 +3,6 @@ package com.example.crexinfo.model.viewdatas
 import android.os.Parcelable
 import com.example.crexinfo.model.BaseViewType
 import com.example.crexinfo.model.ITEM_PLAYING_XI_TEAM
-import com.example.crexinfo.model.PlayerViewData
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

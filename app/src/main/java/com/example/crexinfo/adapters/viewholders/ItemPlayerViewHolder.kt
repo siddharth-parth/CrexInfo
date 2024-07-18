@@ -2,36 +2,47 @@ package com.example.crexinfo.adapters.viewholders
 
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.crexinfo.R
 import com.example.crexinfo.databinding.ItemBottomSheetPlayerBinding
-import com.example.crexinfo.helper.FormatHelper.getPlayerHead
-import com.example.crexinfo.helper.FormatHelper.getTeamJersey
+import com.example.crexinfo.helper.FormatHelper.getPlayerHeadUrl
+import com.example.crexinfo.helper.FormatHelper.getTeamJerseyUrl
+import com.example.crexinfo.helper.ViewHelper
 import com.example.crexinfo.model.BaseViewType
-import com.example.crexinfo.model.PlayerViewData
+import com.example.crexinfo.model.viewdatas.PlayerViewData
 
 class ItemPlayerViewHolder(private val binding: ItemBottomSheetPlayerBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
+    // binds data to the view if any
     fun bind(viewData: BaseViewType) {
         val data = viewData as? PlayerViewData ?: return
 
         binding.apply {
             val context = root.context
 
-            Glide.with(context)
-                .load(data.playerKey.getPlayerHead())
-                .placeholder(R.drawable.ic_face_placeholder_helmet)
-                .into(ivPlayerHead)
+            // sets player head to the player head image view
+            ViewHelper.loadImage(
+                ivPlayerHead,
+                data.playerKey.getPlayerHeadUrl(),
+                ContextCompat.getDrawable(
+                    context,
+                    R.drawable.ic_face_placeholder_helmet
+                )
+            )
 
-            Glide.with(context)
-                .load(data.teamKey.getTeamJersey())
-                .placeholder(R.drawable.ic_jersey)
-                .into(ivTeamJersey)
+            // sets team jersey to the player team jersey image view
+            ViewHelper.loadImage(
+                ivTeamJersey,
+                data.teamKey.getTeamJerseyUrl(),
+                ContextCompat.getDrawable(
+                    context,
+                    R.drawable.ic_jersey
+                )
+            )
 
             tvPlayerRole.text = data.role
-
             if (viewData.isCaptain) {
+                // appends captain tag to the player name if they are a captain
                 tvPlayerName.text = "${data.playerName} (c)"
                 tvPlayerName.setTextColor(ContextCompat.getColor(context, R.color.ce_highlight_ac2))
             } else {
@@ -45,8 +56,8 @@ class ItemPlayerViewHolder(private val binding: ItemBottomSheetPlayerBinding) :
             }
 
             val playerNameSetText = tvPlayerName.text
-
             if (viewData.isWicketKeeper) {
+                // appends wicketkeeper tag to the player name if they are a wicketkeeper
                 tvPlayerName.text = "${playerNameSetText} (wk)"
                 tvPlayerName.setTextColor(ContextCompat.getColor(context, R.color.ce_highlight_ac2))
             } else {

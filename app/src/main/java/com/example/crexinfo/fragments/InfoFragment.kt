@@ -7,12 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.crexinfo.adapters.InfoPageAdapter
 import com.example.crexinfo.adapters.InfoPageAdapterClickListener
 import com.example.crexinfo.api.CrexVolley
 import com.example.crexinfo.databinding.FragmentInfoBinding
-import com.example.crexinfo.helper.FormatHelper.getTeamLogo
+import com.example.crexinfo.helper.FormatHelper.getTeamLogoUrl
 import com.example.crexinfo.helper.ViewHelper
 import com.example.crexinfo.model.BaseViewType
 import com.example.crexinfo.model.viewdatas.DividerViewData
@@ -46,8 +45,10 @@ class InfoFragment : Fragment(), InfoPageAdapterClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // initializes the infoRepository
         infoRepository = MatchInfoRepository(CrexVolley.getInstance(requireContext()).requestQueue)
 
+        // initializes the viewModel using the [InfoViewModel]
         viewModel = ViewModelProvider(
             this,
             InfoViewModelFactory(infoRepository)
@@ -58,6 +59,7 @@ class InfoFragment : Fragment(), InfoPageAdapterClickListener {
         fetchData()
     }
 
+    // initializes the info recycler view
     private fun initRecyclerView() {
         binding.rvMatchInfo.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -66,11 +68,13 @@ class InfoFragment : Fragment(), InfoPageAdapterClickListener {
         }
     }
 
+    // observes the live data from the view model
     private fun observeData() {
         viewModel.infoLiveData.observe(viewLifecycleOwner) { response ->
             matchInfoData = response
             setMatchDetails(response)
 
+            // adds the items in the recycler view
             infoAdapter.addItems(
                 listOf(
                     response.matchDetails,
@@ -95,21 +99,27 @@ class InfoFragment : Fragment(), InfoPageAdapterClickListener {
         }
     }
 
+    // fetches the data to populate view
     private fun fetchData() {
         viewModel.fetchInfo()
     }
 
+    // sets the basic match details
     private fun setMatchDetails(matchInfo: MatchInfoViewData) {
         binding.apply {
-            Glide.with(this@InfoFragment)
-                .load(matchInfo.teamOneKey.getTeamLogo())
-                .placeholder(ViewHelper.getShimmer())
-                .into(ivTeamOne)
+            // sets team logo to the team one logo image view
+            ViewHelper.loadImage(
+                ivTeamOne,
+                matchInfo.teamOneKey.getTeamLogoUrl(),
+                ViewHelper.getShimmer()
+            )
 
-            Glide.with(this@InfoFragment)
-                .load(matchInfo.teamTwoKey.getTeamLogo())
-                .placeholder(ViewHelper.getShimmer())
-                .into(ivTeamTwo)
+            // sets team logo to the team two logo image view
+            ViewHelper.loadImage(
+                ivTeamTwo,
+                matchInfo.teamTwoKey.getTeamLogoUrl(),
+                ViewHelper.getShimmer()
+            )
 
             tvTeamOne.text = matchInfo.teamOneShortName
             tvTeamTwo.text = matchInfo.teamTwoShortName
@@ -126,7 +136,8 @@ class InfoFragment : Fragment(), InfoPageAdapterClickListener {
             .isExpanded(!data.isExpanded)
             .build()
 
-        infoAdapter.updateItemIndex(
+        // updates [isExpanded] in the item in adapter
+        infoAdapter.updateItemAtIndex(
             position,
             updatedViewData
         )
@@ -140,6 +151,7 @@ class InfoFragment : Fragment(), InfoPageAdapterClickListener {
         val teamRecentMatchesInfo = (matchData.teamsRecentMatches[teamInd]).teamRecentMatchesInfo
 
         if (data.isExpanded) {
+            // if view is already expanded then it removes the see more view and the match cards to shrink the view
             val seeMoreViewData = getSeeMoreViewFromAdapter()
             val removeItems = (teamRecentMatchesInfo as List<BaseViewType>).toMutableList()
             seeMoreViewData?.let {
@@ -147,12 +159,14 @@ class InfoFragment : Fragment(), InfoPageAdapterClickListener {
             }
             infoAdapter.removeItemsAtIndex(position + 1, removeItems)
         } else {
+            // if view is not expanded then it adds the see more view and the match cards to expand the view
             val addItems = (teamRecentMatchesInfo as List<BaseViewType>).toMutableList()
             addItems.add(SeeMoreFixturesViewData.Builder().build())
             infoAdapter.addItemsAtIndex(position + 1, addItems)
         }
     }
 
+    // finds and returns the [SeeMoreFixturesViewData] from the recycler view
     private fun getSeeMoreViewFromAdapter(): SeeMoreFixturesViewData? {
         var seeMoreViewData: SeeMoreFixturesViewData? = null
         infoAdapter.items.forEach { item ->

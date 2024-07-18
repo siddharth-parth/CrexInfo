@@ -15,6 +15,7 @@ class InfoViewModel(private val infoRepository: MatchInfoRepository) :
     private val _infoLiveData: MutableLiveData<MatchInfoViewData> = MutableLiveData()
     val infoLiveData: LiveData<MatchInfoViewData> = _infoLiveData
 
+    // collects the match info data from API and posts it in [_infoLiveData]
     fun fetchInfo() {
         viewModelScope.launch(Dispatchers.IO) {
             infoRepository.fetchData().collect { matchInfo ->
@@ -23,6 +24,7 @@ class InfoViewModel(private val infoRepository: MatchInfoRepository) :
         }
     }
 
+    // collects the match info data from Firebase and posts it in [_infoLiveData]
     fun fetchInfoFromFirebase() {
         viewModelScope.launch(Dispatchers.IO) {
             infoRepository.fetchDataFromFirebase().collect { matchInfo ->

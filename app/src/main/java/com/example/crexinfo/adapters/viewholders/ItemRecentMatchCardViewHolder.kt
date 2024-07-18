@@ -3,10 +3,9 @@ package com.example.crexinfo.adapters.viewholders
 import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.crexinfo.R
 import com.example.crexinfo.databinding.ItemRecentMatchCardBinding
-import com.example.crexinfo.helper.FormatHelper.getTeamLogo
+import com.example.crexinfo.helper.FormatHelper.getTeamLogoUrl
 import com.example.crexinfo.helper.ViewHelper
 import com.example.crexinfo.model.BaseViewType
 import com.example.crexinfo.model.viewdatas.RecentMatchInfoViewData
@@ -14,20 +13,25 @@ import com.example.crexinfo.model.viewdatas.RecentMatchInfoViewData
 class ItemRecentMatchCardViewHolder(private val binding: ItemRecentMatchCardBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
+    // binds data to the view if any
     fun bind(viewData: BaseViewType) {
         val context = binding.root.context
         val data = viewData as? RecentMatchInfoViewData ?: return
 
         binding.apply {
-            Glide.with(context)
-                .load(data.teamOneKey.getTeamLogo())
-                .placeholder(ViewHelper.getShimmer())
-                .into(ivTeamOne)
+            // sets team logo to the first team logo image view
+            ViewHelper.loadImage(
+                ivTeamOne,
+                data.teamOneKey.getTeamLogoUrl(),
+                ViewHelper.getShimmer()
+            )
 
-            Glide.with(context)
-                .load(data.teamTwoKey.getTeamLogo())
-                .placeholder(ViewHelper.getShimmer())
-                .into(ivTeamTwo)
+            // sets team logo to the second team logo image view
+            ViewHelper.loadImage(
+                ivTeamTwo,
+                data.teamTwoKey.getTeamLogoUrl(),
+                ViewHelper.getShimmer()
+            )
 
             tvTeamOne.text = data.teamOneName
             tvTeamTwo.text = data.teamTwoName
@@ -41,6 +45,8 @@ class ItemRecentMatchCardViewHolder(private val binding: ItemRecentMatchCardBind
             tvMatchNumber.text = data.matchNumber
 
             layoutResultBadge.tvResultBadge.text = viewData.resultString
+
+            // sets the result badge color as per Win/Loss
             if (viewData.resultString == "W") {
                 layoutResultBadge.tvResultBadge.backgroundTintList = ColorStateList.valueOf(
                     ContextCompat.getColor(

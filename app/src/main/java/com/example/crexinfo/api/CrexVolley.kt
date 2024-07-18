@@ -10,6 +10,7 @@ class CrexVolley(context: Context) {
         @Volatile
         private var INSTANCE: CrexVolley? = null
 
+        // returns the instance of Volley
         fun getInstance(context: Context) =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: CrexVolley(context).also {
@@ -18,6 +19,7 @@ class CrexVolley(context: Context) {
             }
     }
 
+    // instance of volley request queue
     val requestQueue: RequestQueue by lazy {
         Volley.newRequestQueue(context.applicationContext)
     }

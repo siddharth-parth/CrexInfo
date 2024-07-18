@@ -21,8 +21,10 @@ class MatchInfoRepository(private val requestQueue: RequestQueue) {
         private const val MATCH_INFO_REF = "match_info"
     }
 
+    // calls the API to fetch match info and returns a flow with the data
     fun fetchData(): Flow<MatchInfoViewData> {
         return callbackFlow {
+            // json request to fetch match info
             val request = JsonObjectRequest(
                 Request.Method.GET,
                 "https://cricket-exchange-testing.firebaseio.com/match/info.json",
@@ -33,14 +35,16 @@ class MatchInfoRepository(private val requestQueue: RequestQueue) {
                     trySend(ViewDataConverter.convertMatchInfo(infoData))
                 },
                 { error ->
+                    // logs the error in case of API failure
                     Log.e("CrexInfo", "API failed due to error: ", error.cause)
                 }
             )
             requestQueue.add(request)
-            awaitClose {  }
+            awaitClose { }
         }
     }
 
+    // gets the match info data from FirebaseDatabase and returns a flow with the data
     fun fetchDataFromFirebase(): Flow<MatchInfoViewData> {
         return callbackFlow {
             try {
@@ -57,13 +61,15 @@ class MatchInfoRepository(private val requestQueue: RequestQueue) {
                             trySend(ViewDataConverter.convertMatchInfo(person))
                         }
                     } else {
+                        // logs the error in case the firebase task fails
                         Log.e("CrexInfo", "Fetching data failed due to ${task.exception?.message}")
                     }
                 }
             } catch (exception: Exception) {
+                // logs the error in case of error while adding the firebase listener
                 Log.e("CrexInfo", "Fetching data failed due to: ${exception.message}")
             }
-            awaitClose {  }
+            awaitClose { }
         }
     }
 }

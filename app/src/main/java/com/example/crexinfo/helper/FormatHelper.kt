@@ -6,10 +6,11 @@ import java.util.TimeZone
 
 object FormatHelper {
 
+    // extracts time [01:00 AM] from the timestamp in format [2024-04-13T19:30:00.000Z]
     fun extractTime(timestamp: String): String {
         // Define input and output date formats
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-        val outputFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
 
         // Set the time zone to IST (Indian Standard Time)
         outputFormat.timeZone = TimeZone.getTimeZone("Asia/Kolkata")
@@ -21,6 +22,7 @@ object FormatHelper {
         return outputFormat.format(date)
     }
 
+    // extracts abbreviated day and month [14 Apr] from the timestamp in format [2024-04-13T19:30:00.000Z]
     fun extractDayAndMonthAbbreviation(timestamp: String): String {
         // Define input and output date formats
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
@@ -36,6 +38,7 @@ object FormatHelper {
         return outputFormat.format(date)
     }
 
+    // extracts formatted date (Sunday, 14 Apr, 1:00 PM IST) from the timestamp in format [2024-04-13T19:30:00.000Z]
     fun extractFormattedDateTime(timestamp: String): String {
         // Define input and output date formats
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
@@ -75,19 +78,23 @@ object FormatHelper {
         return result
     }
 
-    fun String.getTeamLogo(): String {
+    // returns the team logo url when called from [teamKey]
+    fun String.getTeamLogoUrl(): String {
         return "https://cricketvectors.akamaized.net/Teams/$this.png"
     }
 
-    fun String.getSeriesLogo(): String {
+    // returns the team jersey url when called from [teamKey]
+    fun String.getTeamJerseyUrl(): String {
+        return "https://cricketvectors.akamaized.net/jersey/limited/org/$this.png"
+    }
+
+    // returns the series logo url when called from [seriesKey]
+    fun String.getSeriesLogoUrl(): String {
         return "https://cricketvectors.akamaized.net/Series/$this.png"
     }
 
-    fun String.getPlayerHead(): String {
+    // returns the player head url when called from [playerKey]
+    fun String.getPlayerHeadUrl(): String {
         return "https://cricketvectors.akamaized.net/players/org/$this.png"
-    }
-
-    fun String.getTeamJersey(): String {
-        return "https://cricketvectors.akamaized.net/jersey/limited/org/$this.png"
     }
 }

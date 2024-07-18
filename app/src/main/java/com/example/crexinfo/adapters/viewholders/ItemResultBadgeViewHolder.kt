@@ -10,11 +10,14 @@ import com.example.crexinfo.model.viewdatas.TeamFormViewData
 class ItemResultBadgeViewHolder(private val binding: ItemMatchResultBadgeBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
+    // binds data to the view if any
     fun bind(viewData: TeamFormViewData) {
         binding.apply {
             val context = tvResultBadge.context
 
             tvResultBadge.text = viewData.resultString
+
+            // sets the result badge color as per Win/Loss
             if (viewData.resultString == "W") {
                 tvResultBadge.backgroundTintList = ColorStateList.valueOf(
                     ContextCompat.getColor(

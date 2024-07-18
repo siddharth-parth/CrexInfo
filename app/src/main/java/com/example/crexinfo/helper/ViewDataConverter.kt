@@ -5,7 +5,7 @@ import com.example.crexinfo.api.model.PlayerNetwork
 import com.example.crexinfo.api.model.RecentMatchInfoNetwork
 import com.example.crexinfo.api.model.TeamComparisonNetwork
 import com.example.crexinfo.api.model.TeamComparisonStatsNetwork
-import com.example.crexinfo.model.PlayerViewData
+import com.example.crexinfo.model.viewdatas.PlayerViewData
 import com.example.crexinfo.model.viewdatas.MatchDetailsViewData
 import com.example.crexinfo.model.viewdatas.MatchEventViewData
 import com.example.crexinfo.model.viewdatas.MatchInfoViewData

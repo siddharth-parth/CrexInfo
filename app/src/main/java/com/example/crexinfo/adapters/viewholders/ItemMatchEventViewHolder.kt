@@ -8,6 +8,7 @@ import com.example.crexinfo.model.viewdatas.MatchEventViewData
 class ItemMatchEventViewHolder(private val binding: ItemMatchEventBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
+    // binds data to the view if any
     fun bind(viewData: BaseViewType) {
         binding.apply {
             val data = viewData as? MatchEventViewData ?: return@apply

@@ -4,30 +4,30 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crexinfo.adapters.viewholders.ItemDividerViewHolder
-import com.example.crexinfo.adapters.viewholders.ItemSectionTitleViewHolder
 import com.example.crexinfo.adapters.viewholders.ItemMatchDetailsViewHolder
 import com.example.crexinfo.adapters.viewholders.ItemMatchEventViewHolder
 import com.example.crexinfo.adapters.viewholders.ItemPlayingXITeamViewHolder
 import com.example.crexinfo.adapters.viewholders.ItemRecentMatchCardViewHolder
+import com.example.crexinfo.adapters.viewholders.ItemSectionTitleViewHolder
 import com.example.crexinfo.adapters.viewholders.ItemSeeMoreFixturesViewHolder
 import com.example.crexinfo.adapters.viewholders.ItemTeamComparisonViewHolder
 import com.example.crexinfo.adapters.viewholders.ItemTeamRecentMatchesViewHolder
 import com.example.crexinfo.databinding.ItemDividerBinding
-import com.example.crexinfo.databinding.ItemSectionTitleBinding
 import com.example.crexinfo.databinding.ItemMatchDetailsBinding
 import com.example.crexinfo.databinding.ItemMatchEventBinding
 import com.example.crexinfo.databinding.ItemPlayingXiTeamBinding
 import com.example.crexinfo.databinding.ItemRecentMatchCardBinding
+import com.example.crexinfo.databinding.ItemSectionTitleBinding
 import com.example.crexinfo.databinding.ItemSeeMoreFixturesBinding
 import com.example.crexinfo.databinding.ItemTeamComparisonBinding
 import com.example.crexinfo.databinding.ItemTeamRecentMatchesBinding
 import com.example.crexinfo.model.BaseViewType
 import com.example.crexinfo.model.ITEM_DIVIDER
-import com.example.crexinfo.model.ITEM_SECTION_TITLE
 import com.example.crexinfo.model.ITEM_MATCH_DETAILS
 import com.example.crexinfo.model.ITEM_MATCH_EVENT
 import com.example.crexinfo.model.ITEM_PLAYING_XI_TEAM
 import com.example.crexinfo.model.ITEM_RECENT_MATCH_CARD
+import com.example.crexinfo.model.ITEM_SECTION_TITLE
 import com.example.crexinfo.model.ITEM_SEE_MORE_FIXTURES
 import com.example.crexinfo.model.ITEM_TEAM_COMPARISON
 import com.example.crexinfo.model.ITEM_TEAM_RECENT_MATCHES
@@ -35,8 +35,10 @@ import com.example.crexinfo.model.ITEM_TEAM_RECENT_MATCHES
 class InfoPageAdapter(private val infoPagerAdapterClickListener: InfoPageAdapterClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    // holds the items of the recycler view
     val items: MutableList<BaseViewType> = mutableListOf()
 
+    // returns the view holder for the recycler item based on the view type
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
 
@@ -92,6 +94,7 @@ class InfoPageAdapter(private val infoPagerAdapterClickListener: InfoPageAdapter
         }
     }
 
+    // binds the data to the recyclerview item based on the view type
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         when (holder) {
@@ -149,43 +152,48 @@ class InfoPageAdapter(private val infoPagerAdapterClickListener: InfoPageAdapter
         return items[position].viewType
     }
 
+    // adds an item to the recyclerview and notifies about the inserted item
     fun addItem(item: BaseViewType) {
         items.add(item)
         notifyItemInserted((items.size - 1))
     }
 
+    // adds an item to the recyclerview at the specified index and notifies about the inserted item
     fun addItemAtIndex(ind: Int, item: BaseViewType) {
         items.add(ind, item)
         notifyItemInserted(ind)
     }
 
+    // adds items to the recyclerview and notifies about the inserted range of items
     fun addItems(newItems: List<BaseViewType>) {
         val oldInd = items.size
         items.addAll(newItems)
         notifyItemRangeInserted(oldInd, newItems.size)
     }
 
+    // adds items to the recyclerview at an index and notifies about the inserted range of items
     fun addItemsAtIndex(ind: Int, newItems: List<BaseViewType>) {
         items.addAll(ind, newItems)
         notifyItemRangeInserted(ind, newItems.size)
     }
 
+    // removes items from the recyclerview at an index and notifies about the removed range of items
     fun removeItemsAtIndex(ind: Int, removedItems: List<BaseViewType>) {
         items.removeAll(removedItems)
         notifyItemRangeRemoved(ind, ind + (removedItems.size))
     }
 
-    fun updateItemIndex(ind: Int, updatedItem: BaseViewType) {
+    // updates the item in the recyclerview at an index and notifies about the item changed
+    fun updateItemAtIndex(ind: Int, updatedItem: BaseViewType) {
         items[ind] = updatedItem
         notifyItemChanged(ind)
-    }
-
-    fun getItemAtIndex(ind: Int): BaseViewType {
-        return items[ind]
     }
 }
 
 interface InfoPageAdapterClickListener {
+    // callback for when team form is expanded
     fun onTeamFormExpanded(position: Int, viewData: BaseViewType)
+
+    // callback for when playing xi is opened
     fun onTeamPlayingXIOpened(position: Int, viewData: BaseViewType)
 }

@@ -1,7 +1,10 @@
 package com.example.crexinfo.helper
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.TypedValue
+import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerDrawable
 
@@ -25,11 +28,28 @@ object ViewHelper {
         return shimmerDrawable
     }
 
+    // converts pixel to DP and returns the DP value
     fun pxToDp(context: Context, px: Float): Int {
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
             px,
             context.resources.displayMetrics
         ).toInt()
+    }
+
+    /**
+     * @param imageView: Image view where the image is to be loaded
+     * @param src: Source for the image data. This can be a url, drawable, bitmap, resourceId, etc
+     * @param placeholderDrawable: Drawable to be set as the placeholder till the image loads
+     * */
+    fun loadImage(
+        imageView: ImageView,
+        src: Any,
+        placeholderDrawable: Drawable? = null
+    ) {
+        Glide.with(imageView.context)
+            .load(src)
+            .placeholder(placeholderDrawable)
+            .into(imageView)
     }
 }
