@@ -12,7 +12,7 @@ class CrexInfoApplication : Application() {
         // initializes the volley to be used throughout the app lifecycle
         CrexVolley.getInstance(applicationContext)
 
-        //initializes firebase app
+        //initializes the firebase app
         FirebaseApp.initializeApp(this)
     }
 }
