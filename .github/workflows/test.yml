@@ -1,0 +1,31 @@
+name: Build Android App
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11' # or whichever version you need
+          distribution: 'adopt'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew assembleRelease
+
+      - name: Archive the build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: android-build
+          path: app/build/outputs/apk/release/app-release.apk # Adjust the path if needed
